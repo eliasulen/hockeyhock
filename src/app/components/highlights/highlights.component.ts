@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HighlightService } from 'src/app/services/highlight.service';
+import { HighlightService } from '../../services/highlight.service';
 
 @Component({
   selector: 'app-highlights',
