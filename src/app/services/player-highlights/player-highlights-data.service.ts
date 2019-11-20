@@ -15,7 +15,7 @@ export class PlayerHighlightsDataService {
 
   constructor(private http: HttpClient) { }
 
-  private getAmountOfPages(playerId: number) : Observable<number>
+  private getAmountOfPages(playerId: number)
   {
     let url = `${base}${playerId}&page=${1}&type=video`;
 

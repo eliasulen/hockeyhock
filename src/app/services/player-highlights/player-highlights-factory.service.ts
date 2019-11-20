@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PlayerHighlightsDataService } from './player-highlights-data.service'
 import { MediaDataService } from '../media/media-data.service'
-import { PlayerHighlight } from '../../data/player-highlights/player-highlight';
+import { PlayerHighlight, PlayerHighlightTags } from '../../data/player-highlights/player-highlight';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, forkJoin, observable, of } from 'rxjs';
 
@@ -12,7 +12,6 @@ export class PlayerHighlightsFactoryService {
 
   constructor(
     private playerHighlightsDataService: PlayerHighlightsDataService,
-    private mediaDataService: MediaDataService
     ) { }  
 
   search(playerId: number)
@@ -28,11 +27,11 @@ export class PlayerHighlightsFactoryService {
                {
                  var playerHighlight : PlayerHighlight = {
                    blurb: that.blurb,
-                   mediaPlaybackId: null,
-                   statsEventId: null,
-                   gameId: null,
-                   date: that.tags.filter(x => x.type == "display_timestamp").map(x => x.value)[0],
-                   media: null
+                   mediaPlaybackId: that.tags.filter(x => x.type == PlayerHighlightTags.mediaPlaybackId).map(x => x.value)[0] || null, //TODO fix common method
+                   statsEventId: that.tags.filter(x => x.type == PlayerHighlightTags.StatsEventId).map(x => x.value)[0] || null,
+                   gameId: that.tags.filter(x => x.type == PlayerHighlightTags.GameId).map(x => x.value)[0] || null,
+                   date: that.tags.filter(x => x.type == PlayerHighlightTags.Date).map(x => x.value)[0] || null,
+                   media: null //Set later
                  }
 
                  data.push(playerHighlight)

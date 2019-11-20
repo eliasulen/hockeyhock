@@ -1,2 +1,13 @@
 <p>player highlights works!</p>
 <p>link: {{ playerHighlights.length }}</p>
+
+<div *ngIf="playerHighlights">
+    <!-- TODO fixa style -->
+    <ng-container *ngFor="let playerHighlight of playerHighlights">
+    <ng-container *ngFor="let playback of playerHighlight.media.playbacks">
+            <video style="margin: 2rem;" *ngIf="showVideo(playback, playerHighlight.media?.playbacks)" width="400" controls>
+                    <source [src]="playback.url" type="video/mp4">
+             </video>
+    </ng-container>
+    </ng-container>
+</div>
