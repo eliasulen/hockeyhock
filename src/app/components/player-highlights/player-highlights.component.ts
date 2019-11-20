@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PlayerHighlightsFactoryService } from 'src/app/services/player-highlights/player-highlights-factory.service';
-import { PlayerHighlight } from 'src/app/data/player-highlights/player-highlight';
+import { PlayerHighlightsFactoryService } from '../../services/player-highlights/player-highlights-factory.service';
+import { PlayerHighlight } from '../../data/player-highlights/player-highlight';
 
 @Component({
   selector: 'app-player-highlights',
