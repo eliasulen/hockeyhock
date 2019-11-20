@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HighlightsComponent } from './components/highlights/highlights.component';
+import { PlayerHighlightsComponent } from './components/player-highlights/player-highlights.component';
 import { HomeComponent } from './components/home/home.component';
 
 
@@ -11,8 +11,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'highlights',
-    component: HighlightsComponent,
+    path: 'player-highlights',
+    component: PlayerHighlightsComponent,
     pathMatch: 'full'
   } 
 ];
