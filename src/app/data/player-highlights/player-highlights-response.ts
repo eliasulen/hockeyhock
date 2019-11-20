@@ -256,7 +256,7 @@ export interface Doc {
     seoDescription?: any;
 }
 
-export interface PlayerHighlights {
+export interface PlayerHighlightsResponse {
     meta: Meta;
     facets: Facet[];
     docs: Doc[];

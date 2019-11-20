@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PlayerHighlightsService } from 'src/app/services/player-highlights.service';
+import { PlayerHighlightsFactoryService } from 'src/app/services/player-highlights/player-highlights-factory.service';
+import { PlayerHighlight } from 'src/app/data/player-highlights/player-highlight';
 
 @Component({
   selector: 'app-player-highlights',
@@ -8,18 +9,19 @@ import { PlayerHighlightsService } from 'src/app/services/player-highlights.serv
 })
 export class PlayerHighlightsComponent implements OnInit {
 
-  public link: string = "nothing yet";
+  public playerHighlights: PlayerHighlight[];
 
-  constructor(private playerHighlightService: PlayerHighlightsService) { }
+  constructor(private playerHighlightFactoryService: PlayerHighlightsFactoryService) { }
 
   ngOnInit() {
-    this.playerHighlightService.getLink("8476453", "1").subscribe(
-      response => 
+    
+    this.playerHighlightFactoryService.search(8476453).subscribe(x => 
       {
-      
-      }
-
-    );
+        x.subscribe(x => {
+          this.playerHighlights = x;
+        })
+      });
+    
   }
 
 }
