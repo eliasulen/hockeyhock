@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from './components/menu/menu.component';
 import { SharedModule } from './modules/shared/shared.module';
-import { HighlightsComponent } from './components/highlights/highlights.component';
+import { PlayerHighlightsComponent } from './components/player-highlights/player-highlights.component';
 import { HomeComponent } from './components/home/home.component';
 
 
@@ -15,7 +15,7 @@ import { HomeComponent } from './components/home/home.component';
   declarations: [
     AppComponent,
     MenuComponent,
-    HighlightsComponent,
+    PlayerHighlightsComponent,
     HomeComponent,
   ],
   imports: [
