@@ -4,6 +4,8 @@ import { PlayerHighlight } from '../../data/player-highlights/player-highlight';
 import { MediaFactoryService } from '../../services/media/media-factory.service';
 import { Observable, forkJoin } from 'rxjs';
 import { Media, Playback, MediaPlayback } from '../../data/media/media';
+import { tap } from 'rxjs/operators';
+import { SpinnerService } from '../../services/spinner/spinner.service';
 
 @Component({
   selector: 'app-player-highlights',
@@ -13,19 +15,26 @@ import { Media, Playback, MediaPlayback } from '../../data/media/media';
 export class PlayerHighlightsComponent implements OnInit {
 
   public playerHighlights: PlayerHighlight[] = [];
-
   constructor(
     private playerHighlightFactoryService: PlayerHighlightsFactoryService,
-    private mediaFactoryService: MediaFactoryService
+    private mediaFactoryService: MediaFactoryService,
+    private spinnerService: SpinnerService
     ) { }
 
   ngOnInit() {
-    
-    let take : number = 11;
+    //8476453
 
-    this.playerHighlightFactoryService.search(8476453, 10, 0).subscribe(x => 
+    this.callSearch(8476453, 3, 0);
+  }
+
+  private callSearch(playerId: number, take: number, skip: number)
+  {
+    this.playerHighlightFactoryService.search(playerId, take, skip).subscribe(x => 
       {
-        x.subscribe(x => { 
+        console.log(x)
+        x.pipe(tap(x => {
+          
+        })).subscribe(x => { 
           let playerHighlights = x;
           let data : Observable<Media>[] = []
 
@@ -44,11 +53,10 @@ export class PlayerHighlightsComponent implements OnInit {
 
             this.playerHighlights = playerHighlights;
 
-            console.log(this.playerHighlights)
+            
           })
         })
       });
-    
   }
 
   showVideo(playback: Playback, playbacks: Playback[])
@@ -70,6 +78,21 @@ export class PlayerHighlightsComponent implements OnInit {
         return true;
 
       return false;
+  }
+
+  isMp4(playback: Playback)
+  {
+    return playback.type == MediaPlayback.mp4;
+  }
+
+  isHls(playback: Playback)
+  {
+    return playback.type == MediaPlayback.m3u8;
+  }
+
+  isEmbed(playback : Playback)
+  {
+    return playback.type == MediaPlayback.embed;
   }
 
 }

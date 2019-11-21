@@ -65,7 +65,7 @@ export class PlayerHighlightsDataService {
         let data : Observable<PlayerHighlightsResponse>[] = []
 
         pageData.pages.forEach((that) => {
-          if(that.page * pageData.pageSize <= take)
+          if(that.page * pageData.pageSize < take + pageData.pageSize)
           {
             let url = `${base}${playerId}&page=${that.page}&type=video`;
             data.push(this.http.get<PlayerHighlightsResponse>(url))

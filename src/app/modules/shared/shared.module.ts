@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MatButtonModule } from '@angular/material/button'
-import { MatToolbarModule } from '@angular/material/toolbar'
+import { UiModule } from '../ui/ui.module'
 
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+
+import { PlaybackModule } from '../playback/playback.module'
+
+import { CustomHttpInterceptor } from '../../interceptors/custom-http-interceptor'
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -17,9 +20,9 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [],
   imports: [
     CommonModule,
-    MatButtonModule,
-    MatToolbarModule,
+    UiModule,
     HttpClientModule,
+    PlaybackModule,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,
@@ -30,10 +33,14 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   exports: [
     CommonModule,
-    MatButtonModule,
-    MatToolbarModule,
+    UiModule,
     TranslateModule,
-    HttpClientModule
-  ]
+    HttpClientModule,
+    PlaybackModule
+  ], providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: CustomHttpInterceptor,
+    multi: true
+  }]
 })
 export class SharedModule { }
