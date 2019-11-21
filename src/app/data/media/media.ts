@@ -7,7 +7,8 @@ export enum MediaPlayback
 
 export interface Media {
     playbacks: Playback[]
-    mediaPlaybackId: number
+    mediaPlaybackId: number,
+    posterUrl: string
 }
 
 export interface Playback

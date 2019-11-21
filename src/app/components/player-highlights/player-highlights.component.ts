@@ -24,14 +24,13 @@ export class PlayerHighlightsComponent implements OnInit {
   ngOnInit() {
     //8476453
 
-    this.callSearch(8476453, 3, 0);
+    this.callSearch(8476453, 5, 0);
   }
 
   private callSearch(playerId: number, take: number, skip: number)
   {
     this.playerHighlightFactoryService.search(playerId, take, skip).subscribe(x => 
       {
-        console.log(x)
         x.pipe(tap(x => {
           
         })).subscribe(x => { 
@@ -78,6 +77,11 @@ export class PlayerHighlightsComponent implements OnInit {
         return true;
 
       return false;
+  }
+
+  getVideoId(media: Media)
+  {
+    return media.mediaPlaybackId
   }
 
   isMp4(playback: Playback)

@@ -30,5 +30,10 @@ $hockeyhock-theme: mat-dark-theme($hockeyhock-primary, $hockeyhock-accent, $hock
 
 $background-color: #000000;
 
+.scrubBar[aria-valuenow="NaN%"]
+{
+    display: none !important;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: $background-color; }

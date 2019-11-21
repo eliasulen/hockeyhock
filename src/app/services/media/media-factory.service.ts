@@ -44,6 +44,7 @@ export class MediaFactoryService {
         
         let media : Media =
         {
+          posterUrl: x.posterUrl,
           playbacks: playbacks,
           mediaPlaybackId: mediaPlaybackId
         }

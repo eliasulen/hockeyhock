@@ -9,11 +9,28 @@
                     <mat-grid-tile>
                              <ng-container *ngIf="isHls(playback)">
                                                     <vg-player>
-                                                            <video #myMedia
+                                                                <vg-overlay-play></vg-overlay-play>
+                                                                <vg-buffering></vg-buffering>
+                                                                <vg-controls [vgAutohide]="true"
+                                                                 [vgAutohideTime]="3"
+                                                                 >
+                                                                 <vg-play-pause></vg-play-pause>
+                                                                 <vg-scrub-bar>
+                                                                   <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                                                                   <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                                                                 </vg-scrub-bar>
+                                                                 <vg-mute></vg-mute>
+                                                                 <vg-volume></vg-volume>
+                                                                 <vg-fullscreen></vg-fullscreen>
+                                                                 </vg-controls>
+                                                            <video
+                                                                   #video
+                                                                   [vgMedia]="video"
                                                                    [vgHls]="playback.url"
-                                                                   id="my-video"
-                                                                   controls
-                                                                   preload="'none'">
+                                                                   preload="none"
+                                                                   [id]="getVideoId(playerHighlight.media)"
+                                                                   [poster]="playerHighlight.media.posterUrl"
+                                                                   crossorigin>
                                                             </video>
                                                     </vg-player>
                                             </ng-container>
