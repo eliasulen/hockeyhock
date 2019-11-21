@@ -22,6 +22,7 @@
                                                                  <vg-mute></vg-mute>
                                                                  <vg-volume></vg-volume>
                                                                  <vg-fullscreen></vg-fullscreen>
+                                                                 <!-- <vg-track-selector></vg-track-selector> -->
                                                                  </vg-controls>
                                                             <video
                                                                    #video
@@ -31,6 +32,7 @@
                                                                    [id]="getVideoId(playerHighlight.media)"
                                                                    [poster]="playerHighlight.media.posterUrl"
                                                                    crossorigin>
+                                                                   <!-- <track *ngIf="playerHighlight.media.captionsUrl" label="English" kind="subtitles" srclang="en" [src]="playerHighlight.media.captionsUrl"> -->
                                                             </video>
                                                     </vg-player>
                                             </ng-container>

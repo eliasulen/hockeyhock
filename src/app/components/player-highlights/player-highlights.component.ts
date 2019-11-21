@@ -51,7 +51,7 @@ export class PlayerHighlightsComponent implements OnInit {
               x => x.media && x.media.playbacks && x.media.playbacks.length > 0 && x.media.playbacks.filter(p => p.type != MediaPlayback.embed).length > 0);
 
             this.playerHighlights = playerHighlights;
-
+            console.log(this.playerHighlights)
             
           })
         })

@@ -5,10 +5,16 @@ export enum MediaPlayback
     embed = "Embed"
 }
 
+export enum MediaKeywordsAll
+{
+    captions = "closed_captions_location_vtt"
+}
+
 export interface Media {
     playbacks: Playback[]
     mediaPlaybackId: number,
-    posterUrl: string
+    posterUrl: string,
+    captionsUrl: string
 }
 
 export interface Playback

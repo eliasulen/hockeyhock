@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MediaDataService } from './media-data.service'
 import { map } from 'rxjs/operators'
-import { Media, MediaPlayback, Playback } from '../../data/media/media'
+import { Media, MediaPlayback, Playback, MediaKeywordsAll } from '../../data/media/media'
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +46,8 @@ export class MediaFactoryService {
         {
           posterUrl: x.posterUrl,
           playbacks: playbacks,
-          mediaPlaybackId: mediaPlaybackId
+          mediaPlaybackId: mediaPlaybackId,
+          captionsUrl: x.keywordsAll.filter(f => f.type == MediaKeywordsAll.captions).map(f => f.value)[0]
         }
 
         return media;
