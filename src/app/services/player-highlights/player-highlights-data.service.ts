@@ -7,39 +7,70 @@ import { PlayerHighlightsResponse } from '../../data/player-highlights/player-hi
 const base: string = "https://search-api.svc.nhl.com/svc/search/v2/nhl_nr_sitesearch_en/sitesearch?hl=true&facet=type&expand=partner.media.image&q=";
 ///team/{teamId}/?hl=true&facet=type&expand=partner.media.image&q=
 
+  interface PageData{
+    pageSize: number,
+    pages: Page[]
+  }
+
+  interface Page {
+    page: number
+  }
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class PlayerHighlightsDataService {
 
+
   constructor(private http: HttpClient) { }
 
-  private getAmountOfPages(playerId: number)
+  private getPages(playerId: number, take: number, skip: number)
   {
     let url = `${base}${playerId}&page=${1}&type=video`;
 
     return this.http.get<PlayerHighlightsResponse>(url)
     .pipe(
       map(result => {
-        return result.meta.hits / result.meta.page_size;
+        let skipPages = Math.ceil(skip / result.meta.page_size)
+        let maxPages = result.meta.hits / result.meta.page_size;
+        
+        let pages : Page[] = []
+
+        for(var i = skipPages; i < maxPages - 1; i++)
+        {
+          let page : Page = {
+            page: i
+          }
+          pages.push(page)
+        }
+
+        let pageData : PageData = {
+          pages: pages,
+          pageSize: result.meta.page_size
+        }
+
+        return pageData;
       })
     )
   }
 
-  search(playerId: number)
+  search(playerId: number, take: number, skip: number)
   {
     let url = `${base}${playerId}&page=${1}&type=video`;
 
-     return this.getAmountOfPages(playerId)
+     return this.getPages(playerId, take, skip)
     .pipe(
-      map(amountOfPages => {
+      map(pageData => {
         let data : Observable<PlayerHighlightsResponse>[] = []
-        for(var i = 0; i < amountOfPages - 1 ; i++)
-        {
-          let url = `${base}${playerId}&page=${i+1}&type=video`;
-          data.push(this.http.get<PlayerHighlightsResponse>(url))
-        }
+
+        pageData.pages.forEach((that, index) => {
+          if(index * pageData.pageSize < take)
+          {
+            let url = `${base}${playerId}&page=${that.page}&type=video`;
+            data.push(this.http.get<PlayerHighlightsResponse>(url))
+          }
+        })
 
         return forkJoin(data)
       })

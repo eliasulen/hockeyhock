@@ -14,9 +14,9 @@ export class PlayerHighlightsFactoryService {
     private playerHighlightsDataService: PlayerHighlightsDataService,
     ) { }  
 
-  search(playerId: number)
+  search(playerId: number, take: number, skip: number)
   {     
-      return this.playerHighlightsDataService.search(playerId)
+      return this.playerHighlightsDataService.search(playerId, take, skip)
       .pipe(
         map(x => {
           return x.pipe(

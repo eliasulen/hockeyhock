@@ -21,7 +21,9 @@ export class PlayerHighlightsComponent implements OnInit {
 
   ngOnInit() {
     
-    this.playerHighlightFactoryService.search(8476453).subscribe(x => 
+    let take : number = 11;
+
+    this.playerHighlightFactoryService.search(8476453, 10, 0).subscribe(x => 
       {
         x.subscribe(x => { 
           let playerHighlights = x;
