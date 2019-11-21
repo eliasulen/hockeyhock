@@ -22,10 +22,14 @@ export class PlayerHighlightsFactoryService {
           return x.pipe(
             map(x => {
               let data : PlayerHighlight[] = []
-              x.forEach((that) => {
+              let count : number = 0
+              x.forEach((that, index) => {
+               
                that.docs.forEach((that) => 
                {
-                 var playerHighlight : PlayerHighlight = {
+                if(count < take)
+                {
+                   var playerHighlight : PlayerHighlight = {
                    blurb: that.blurb,
                    mediaPlaybackId: that.tags.filter(x => x.type == PlayerHighlightTags.mediaPlaybackId).map(x => x.value)[0] || null, //TODO fix common method
                    statsEventId: that.tags.filter(x => x.type == PlayerHighlightTags.StatsEventId).map(x => x.value)[0] || null,
@@ -33,8 +37,9 @@ export class PlayerHighlightsFactoryService {
                    date: that.tags.filter(x => x.type == PlayerHighlightTags.Date).map(x => x.value)[0] || null,
                    media: null //Set later
                  }
-
                  data.push(playerHighlight)
+                 count++
+                }
                })
               })
               return data;
