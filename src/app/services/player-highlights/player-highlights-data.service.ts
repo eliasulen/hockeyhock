@@ -40,7 +40,7 @@ export class PlayerHighlightsDataService {
         for(var i = skipPages; i < maxPages - 1; i++)
         {
           let page : Page = {
-            page: i
+            page: i + 1
           }
           pages.push(page)
         }
@@ -64,8 +64,8 @@ export class PlayerHighlightsDataService {
       map(pageData => {
         let data : Observable<PlayerHighlightsResponse>[] = []
 
-        pageData.pages.forEach((that, index) => {
-          if(index * pageData.pageSize < take)
+        pageData.pages.forEach((that) => {
+          if(that.page * pageData.pageSize <= take)
           {
             let url = `${base}${playerId}&page=${that.page}&type=video`;
             data.push(this.http.get<PlayerHighlightsResponse>(url))

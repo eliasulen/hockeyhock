@@ -27,7 +27,7 @@ export class PlayerHighlightsFactoryService {
                
                that.docs.forEach((that) => 
                {
-                if(count < take)
+                if(take > count)
                 {
                    var playerHighlight : PlayerHighlight = {
                    blurb: that.blurb,
