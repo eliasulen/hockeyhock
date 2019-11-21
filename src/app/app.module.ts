@@ -9,6 +9,10 @@ import { SharedModule } from './modules/shared/shared.module';
 import { PlayerHighlightsComponent } from './components/player-highlights/player-highlights.component';
 import { HomeComponent } from './components/home/home.component';
 
+import {VgCoreModule} from 'videogular2/compiled/core';
+import {VgControlsModule} from 'videogular2/compiled/controls';
+import {VgOverlayPlayModule} from 'videogular2/compiled/overlay-play';
+import {VgBufferingModule} from 'videogular2/compiled/buffering';
 
 
 @NgModule({
@@ -16,13 +20,18 @@ import { HomeComponent } from './components/home/home.component';
     AppComponent,
     MenuComponent,
     PlayerHighlightsComponent,
-    HomeComponent,
+    HomeComponent
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+     VgCoreModule,
+        VgControlsModule,
+        VgOverlayPlayModule,
+        VgBufferingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
