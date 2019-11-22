@@ -18,7 +18,7 @@ export class PlayerHighlightsComponent implements OnInit {
   constructor(
     private playerHighlightFactoryService: PlayerHighlightsFactoryService,
     private mediaFactoryService: MediaFactoryService,
-    private spinnerService: SpinnerService
+    public spinnerService: SpinnerService
     ) { }
 
   ngOnInit() {
