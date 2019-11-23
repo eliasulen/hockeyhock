@@ -17,7 +17,7 @@ export class MediaDataService {
 
   getByGameId(gameId: number) : Observable<ContentResponse>
   {
-    let url = `http://statsapi.web.nhl.com/api/v1/game/${gameId}/content`;
+    let url = `https://statsapi.web.nhl.com/api/v1/game/${gameId}/content`;
     return this.http.get(url)
     .pipe(
       map(x => {
