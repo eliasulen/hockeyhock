@@ -9,7 +9,7 @@
                             <p>{{ 'game-day-highlights.no_media' | translate }}</p>
                     </mat-grid-tile>
             </mat-grid-list>
-            <mat-grid-list *ngIf="hasMedia(gameDayHighlight)" cols="3" rowHeight="2:1.25">
+            <mat-grid-list *ngIf="hasMedia(gameDayHighlight)" cols="2" rowHeight="2:1.25">
                     <mat-grid-tile *ngFor="let game of gameDayHighlight.games">
                             <!-- <p>{{ mediaAmount(gameDayHighlight) }} {{ 'game-day-highlights.videos' | translate }}</p> -->
                                 <ng-container *ngIf="game.media && game.media.playbacks">
