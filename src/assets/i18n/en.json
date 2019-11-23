@@ -2,6 +2,9 @@
     "app.title": "hockeyhock",
     "app.menu.player-highlights": "Player Highlights",
     "app.menu.game-day-highlights": "Game Day Highlights",
+    "app.menu.m3u8": "m3u8",
+    "app.menu.mp4": "mp4",
+    "app.menu.source": "Video Source",
     
     "game-day-highlights.load_more": "Load more",
     "game-day-highlights.no_media": "No media available",

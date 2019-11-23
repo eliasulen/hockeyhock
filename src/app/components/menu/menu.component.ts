@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
+import { SettingService } from '../../services/setting/setting.service';
+import { SettingType } from '../../data/internal/setting'
+
+const defaultSource = "mp4"
 
 @Component({
   selector: 'app-menu',
@@ -7,18 +11,35 @@ import { Router } from '@angular/router'
   styleUrls: ['./menu.component.scss']
 })
 
+
+
 export class MenuComponent implements OnInit {
 
   menuRoutes: string[] = ["game-day-highlights", "player-highlights"]
+  sourceSettings: string[] = ["m3u8", "mp4"]
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private settingService: SettingService) { }
 
   ngOnInit() {
+    if(!this.settingService.get(SettingType.source))
+    {
+      this.settingService.save(SettingType.source, defaultSource);
+    }
   }
 
   isActive()
   {
     return this.menuRoutes.filter(menuRoute => menuRoute == this.getActive()).length > 0
+  }
+
+  setSource(value: any)
+  {
+    this.settingService.save(SettingType.source, value);
+  }
+
+  getSource()
+  {
+    return this.settingService.get(SettingType.source);
   }
 
   getActive()

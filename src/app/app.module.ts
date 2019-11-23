@@ -8,13 +8,15 @@ import { MenuComponent } from './components/menu/menu.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { PlayerHighlightsComponent } from './components/player-highlights/player-highlights.component';
 import { GameDayHighlightsComponent } from './components/game-day-highlights/game-day-highlights.component';
+import { MediaComponent } from './components/media/media.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     PlayerHighlightsComponent,
-    GameDayHighlightsComponent
+    GameDayHighlightsComponent,
+    MediaComponent
     
   ],
   imports: [
