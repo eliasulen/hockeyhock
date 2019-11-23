@@ -7,6 +7,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon'
+import { MatMenuModule } from '@angular/material/menu'
 
 @NgModule({
   declarations: [],
@@ -18,7 +19,8 @@ import { MatIconModule } from '@angular/material/icon'
     MatGridListModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
   ],
   exports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { MatIconModule } from '@angular/material/icon'
     MatGridListModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
   ]
 })
 export class UiModule { }

@@ -1,4 +1,13 @@
 <mat-toolbar>{{ 'app.title' | translate }}
         <span class="menu-spacer"></span>
-    <button mat-raised-button routerLink="player-highlights">{{ 'app.menu.player-highlights' | translate }}</button>
+        <span *ngIf="isActive()" class="active-component">{{ 'app.menu.' + getActive() | translate }}</span>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button *ngFor="let menuRoute of menuRoutes" [routerLink]="menuRoute" mat-menu-item>
+              <span>{{ 'app.menu.' + menuRoute | translate }}</span>
+            </button>
+          </mat-menu>
+    <!-- <button mat-raised-button routerLink="player-highlights">{{ 'app.menu.player-highlights' | translate }}</button> -->
 </mat-toolbar>

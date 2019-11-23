@@ -7,14 +7,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from './components/menu/menu.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { PlayerHighlightsComponent } from './components/player-highlights/player-highlights.component';
-import { HomeComponent } from './components/home/home.component';
+import { GameDayHighlightsComponent } from './components/game-day-highlights/game-day-highlights.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     PlayerHighlightsComponent,
-    HomeComponent
+    GameDayHighlightsComponent
     
   ],
   imports: [
