@@ -3,84 +3,10 @@
 <mat-grid-list cols="3" rowHeight="2:1.25">
         <ng-container *ngIf="playerHighlights">
                 <!-- TODO fixa style -->
-                <ng-container *ngFor="let playerHighlight of playerHighlights">
-                <ng-container *ngFor="let playback of playerHighlight.media.playbacks">
-                <ng-container *ngIf="showVideo(playback, playerHighlight.media?.playbacks)">
-                    <mat-grid-tile>
-                             <ng-container *ngIf="isHls(playback)">
-                                                    <vg-player>
-                                                                <vg-overlay-play></vg-overlay-play>
-                                                                <vg-buffering></vg-buffering>
-                                                                <vg-controls [vgAutohide]="true"
-                                                                 [vgAutohideTime]="3"
-                                                                 >
-                                                                 <vg-play-pause></vg-play-pause>
-                                                                 <vg-scrub-bar>
-                                                                   <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                                                                   <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
-                                                                 </vg-scrub-bar>
-                                                                 <vg-mute></vg-mute>
-                                                                 <vg-volume></vg-volume>
-                                                                 <vg-fullscreen></vg-fullscreen>
-                                                                 <!-- <vg-track-selector></vg-track-selector> -->
-                                                                 </vg-controls>
-                                                            <video
-                                                                   #video
-                                                                   [vgMedia]="video"
-                                                                   [vgHls]="playback.url"
-                                                                   preload="none"
-                                                                   [id]="getVideoId(playerHighlight.media)"
-                                                                   [poster]="playerHighlight.media.posterUrl"
-                                                                   crossorigin>
-                                                                   <!-- <track *ngIf="playerHighlight.media.captionsUrl" label="English" kind="subtitles" srclang="en" [src]="playerHighlight.media.captionsUrl"> -->
-                                                            </video>
-                                                    </vg-player>
-                                            </ng-container>
-                                            <ng-container *ngIf="isMp4(playback)">
-                                                    <vg-player>
-                                                            <video [poster]="playerHighlight.media.posterUrl" preload="none" [vgMedia]="video" #video [id]="getVideoId(playerHighlight.media)" controls>
-                                                                <source [src]="playback.url" type="video/mp4">
-                                                            </video>
-                                                    </vg-player>
-                                            </ng-container>
-                                            <ng-container *ngIf="isEmbed(playback)">
-                                                <p>embed</p>
-                                            </ng-container> 
-                        <!-- <mat-card>
-                                    <mat-card-header>
-                                      <div mat-card-avatar class="example-header-image"></div>
-                                      <mat-card-title>Shiba Inu</mat-card-title>
-                                      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                                    </mat-card-header>
-                                    <mat-card-content>
-                                       
-                                    </mat-card-content>
-                                    <mat-card-actions>
-                                      <button mat-raised-button>LIKE</button>
-                                      <button mat-raised-button color="primary">SHARE</button>
-                                    </mat-card-actions>
-                                  </mat-card> -->
-                    </mat-grid-tile> 
-                </ng-container>
-                </ng-container>
-                </ng-container>
+                    <ng-container *ngFor="let playerHighlight of playerHighlights">
+                        <mat-grid-tile *ngIf="playerHighlight.media && playerHighlight.media.playbacks">
+                            <app-media [media]="playerHighlight.media"></app-media>
+                        </mat-grid-tile>
+                    </ng-container>
             </ng-container>            
 </mat-grid-list>
-
-
-
-<!-- <vg-player>
-        <video #myMedia
-               [vgHls]="'http://md-akc.med.nhl.com/hls/nhl/2019/09/12/728d0b6c-4a87-42b5-86a6-acceafb2d8ad/1568314596941/master_wired60.m3u8'"
-               id="my-video"
-               controls>
-        </video>
-    </vg-player> -->
-
-
-<!-- <vg-player>
-    <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
-        <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">
-    </video>
-</vg-player> -->
-

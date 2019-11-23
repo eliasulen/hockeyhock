@@ -1,1 +1,10 @@
-<p>media works!</p>
+<ng-container *ngIf="media && media.playbacks">
+        <ng-container *ngFor="let playback of media.playbacks">
+                <vg-player *ngIf="isMp4(playback)">
+                        <video [poster]="media.posterUrl" preload="none" [vgMedia]="video" #video [id]="getVideoId(media)" controls>
+                            <source [src]="playback.url" type="video/mp4">
+                        </video>
+                </vg-player>
+        </ng-container>
+</ng-container>
+
