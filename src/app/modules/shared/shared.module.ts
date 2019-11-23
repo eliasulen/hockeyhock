@@ -12,6 +12,8 @@ import { PlaybackModule } from '../playback/playback.module'
 
 import { CustomHttpInterceptor } from '../../interceptors/custom-http-interceptor'
 
+import { DatePipe } from '@angular/common'
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -41,6 +43,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     provide: HTTP_INTERCEPTORS,
     useClass: CustomHttpInterceptor,
     multi: true
-  }]
+  }, DatePipe]
 })
 export class SharedModule { }

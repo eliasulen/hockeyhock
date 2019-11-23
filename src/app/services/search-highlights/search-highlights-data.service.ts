@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators'
-import { PlayerHighlightsResponse } from '../../data/player-highlights/player-highlights-response'
+import { SearchHighlightResponse } from '../../data/external/search-highlights-response'
 
 const base: string = "https://search-api.svc.nhl.com/svc/search/v2/nhl_nr_sitesearch_en/sitesearch?hl=true&facet=type&expand=partner.media.image&q=";
 ///team/{teamId}/?hl=true&facet=type&expand=partner.media.image&q=
@@ -20,7 +20,7 @@ const base: string = "https://search-api.svc.nhl.com/svc/search/v2/nhl_nr_sitese
   providedIn: 'root'
 })
 
-export class PlayerHighlightsDataService {
+export class SearchHighlightsDataService {
 
 
   constructor(private http: HttpClient) { }
@@ -29,7 +29,7 @@ export class PlayerHighlightsDataService {
   {
     let url = `${base}${playerId}&page=${1}&type=video`;
 
-    return this.http.get<PlayerHighlightsResponse>(url)
+    return this.http.get<SearchHighlightResponse>(url)
     .pipe(
       map(result => {
         let skipPages = Math.ceil(skip / result.meta.page_size)
@@ -62,13 +62,13 @@ export class PlayerHighlightsDataService {
      return this.getPages(playerId, take, skip)
     .pipe(
       map(pageData => {
-        let data : Observable<PlayerHighlightsResponse>[] = []
+        let data : Observable<SearchHighlightResponse>[] = []
 
         pageData.pages.forEach((that) => {
           if(that.page * pageData.pageSize < take + pageData.pageSize)
           {
             let url = `${base}${playerId}&page=${that.page}&type=video`;
-            data.push(this.http.get<PlayerHighlightsResponse>(url))
+            data.push(this.http.get<SearchHighlightResponse>(url))
           }
         })
 

@@ -1,10 +1,10 @@
-import { Media } from '../media/media'
+import { Media } from './media'
 
 export enum PlayerHighlightTags {
-  StatsEventId = "statsEventId",
-  Date = "display_timestamp",
-  GameId = "gameId",
-  mediaPlaybackId = "mediaplaybackid"
+  statsEventId = "statsEventId",
+  display_timestamp = "display_timestamp",
+  gameId = "gameId",
+  mediaplaybackid = "mediaplaybackid"
 }
 
 export interface PlayerHighlight {

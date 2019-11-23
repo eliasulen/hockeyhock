@@ -1,1 +1,34 @@
-<p>game-day-highlights works!</p>
+
+<ng-container *ngIf="gameDayHighlights">
+    <ng-container *ngFor="let gameDayHighlight of gameDayHighlights">
+            <mat-grid-list cols="1" rowHeight="100px">
+                    <mat-grid-tile>        
+                        <h1 class="highlight-title">{{ gameDayHighlight.dates.join(", ") }}</h1>
+                    </mat-grid-tile>
+                    <mat-grid-tile *ngIf="!hasMedia(gameDayHighlight)">
+                            <p>{{ 'game-day-highlights.no_media' | translate }}</p>
+                    </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list *ngIf="hasMedia(gameDayHighlight)" cols="3" rowHeight="2:1.25">
+                    <mat-grid-tile *ngFor="let game of gameDayHighlight.games">
+                            <!-- <p>{{ mediaAmount(gameDayHighlight) }} {{ 'game-day-highlights.videos' | translate }}</p> -->
+                                <ng-container *ngIf="game.media && game.media.playbacks">
+                                    <ng-container *ngFor="let playback of game.media.playbacks">
+                                            <vg-player *ngIf="isMp4(playback)">
+                                                    <video [poster]="game.media.posterUrl" preload="none" [vgMedia]="video" #video [id]="getVideoId(game.media)" controls>
+                                                        <source [src]="playback.url" type="video/mp4">
+                                                    </video>
+                                            </vg-player>
+                                    </ng-container>
+                                </ng-container>
+                    </mat-grid-tile>
+            </mat-grid-list>
+    </ng-container>
+
+    <mat-grid-list cols="1" rowHeight="100px">
+            <mat-grid-tile>      
+                    <button (click)="loadMore()" mat-raised-button color="primary">{{ 'game-day-highlights.load_more' | translate}}</button>
+            </mat-grid-tile>
+    </mat-grid-list>
+</ng-container>
+

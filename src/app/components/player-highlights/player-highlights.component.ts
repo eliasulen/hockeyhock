@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PlayerHighlightsFactoryService } from '../../services/player-highlights/player-highlights-factory.service';
-import { PlayerHighlight } from '../../data/player-highlights/player-highlight';
-import { MediaFactoryService } from '../../services/media/media-factory.service';
+import { PlayerHighlightsFactoryService } from '../../factories/player-highlights/player-highlights-factory.service';
+import { PlayerHighlight } from '../../data/internal/player-highlight';
+import { MediaFactoryService } from '../../factories/media/media-factory.service';
 import { Observable, forkJoin } from 'rxjs';
-import { Media, Playback, MediaPlayback } from '../../data/media/media';
+import { Media, Playback, MediaPlayback } from '../../data/internal/media';
 import { tap } from 'rxjs/operators';
 import { SpinnerService } from '../../services/spinner/spinner.service';
 
@@ -34,11 +34,12 @@ export class PlayerHighlightsComponent implements OnInit {
         x.pipe(tap(x => {
           
         })).subscribe(x => { 
+          //TODO flytta in i factory service
           let playerHighlights = x;
           let data : Observable<Media>[] = []
 
           playerHighlights.forEach((that) => {
-            data.push(this.mediaFactoryService.get(that.mediaPlaybackId))
+            data.push(this.mediaFactoryService.getByMediaPlaybackId(that.mediaPlaybackId))
           })
 
           forkJoin(data).subscribe(y => {
@@ -63,18 +64,25 @@ export class PlayerHighlightsComponent implements OnInit {
     if(!playbacks)
       return false;
 
-    let first = MediaPlayback.m3u8;
-    let second = MediaPlayback.mp4;
-    let third = MediaPlayback.embed;
+    let first = MediaPlayback.FLASH_1800K_896x504;
+    let second = MediaPlayback.FLASH_1800K_960X540;
+    let third = MediaPlayback.HTTP_CLOUD_WIRED_60;
+    let fourth = MediaPlayback.embed;
 
-      if(playback.type == first)
+      if(playback.type ==
+         first)
         return true;
 
-      if(playback.type == second && playbacks.filter(f => f.type == first).length == 0)
+      if(playback.type ==
+        second && playbacks.filter(f => f.type == first).length == 0)
         return true;
 
-      if(playback.type == third && playbacks.filter(f => f.type == first).length == 0 && playbacks.filter(f => f.type == second).length == 0)
+      if(playback.type == 
+        third && playbacks.filter(f => f.type == first).length == 0 && playbacks.filter(f => f.type == second).length == 0)
         return true;
+
+      if(playback.type == 
+        third && playbacks.filter(f => f.type == first).length == 0 && playbacks.filter(f => f.type == second).length == 0 && playbacks.filter(f => f.type == third).length == 0)
 
       return false;
   }
@@ -86,12 +94,12 @@ export class PlayerHighlightsComponent implements OnInit {
 
   isMp4(playback: Playback)
   {
-    return playback.type == MediaPlayback.mp4;
+    return playback.type == MediaPlayback.FLASH_1800K_896x504 || playback.type == MediaPlayback.FLASH_1800K_960X540;
   }
 
   isHls(playback: Playback)
   {
-    return playback.type == MediaPlayback.m3u8;
+    return playback.type == MediaPlayback.HTTP_CLOUD_WIRED_60;
   }
 
   isEmbed(playback : Playback)

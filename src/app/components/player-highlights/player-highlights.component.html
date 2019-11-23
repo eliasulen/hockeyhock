@@ -38,7 +38,7 @@
                                             </ng-container>
                                             <ng-container *ngIf="isMp4(playback)">
                                                     <vg-player>
-                                                            <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+                                                            <video [poster]="playerHighlight.media.posterUrl" preload="none" [vgMedia]="video" #video [id]="getVideoId(playerHighlight.media)" controls>
                                                                 <source [src]="playback.url" type="video/mp4">
                                                             </video>
                                                     </vg-player>
