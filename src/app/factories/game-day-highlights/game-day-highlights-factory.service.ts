@@ -3,7 +3,7 @@ import { MediaDataService } from '../../services/media/media-data.service';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, forkJoin, observable, of } from 'rxjs';
 import { ScheduleDataService } from '../../services/schedule/schedule-data.service';
-import { GameDayHighlight, Game, Venue, Team, GameStatus, GameType } from 'src/app/data/internal/game-day-highlight';
+import { GameDayHighlight, Game, Venue, Team, GameStatus, GameType } from '../../data/internal/game-day-highlight';
 import { ScheduleResponse } from '../../data/external/schedule-response';
 import { MediaEpg, Media, MediaPlayback, Playback, MediaSource } from '../../data/internal/media'
 import { Epg } from '../../data/external/content-response'
