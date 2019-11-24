@@ -3,7 +3,7 @@ import { Router } from '@angular/router'
 import { SettingService } from '../../services/setting/setting.service';
 import { SettingType, Settings } from '../../data/internal/setting'
 
-const defaultSource = "mp4"
+const defaultSource = Settings.source.mp4
 
 @Component({
   selector: 'app-menu',
@@ -22,6 +22,9 @@ export class MenuComponent implements OnInit {
 
     this.sourceSettings = Object.keys(Settings.source).map(x => Settings.source[x])
     this.menuRoutes = Object.keys(Settings.routes).map(x => Settings.routes[x])
+
+    //TODO fixa sen
+    this.menuRoutes = this.menuRoutes.filter(f => f != Settings.routes.playerHighlights)
 
     if(!this.settingService.get(SettingType.source))
     {

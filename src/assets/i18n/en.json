@@ -5,8 +5,11 @@
     "app.menu.m3u8": "HLS (better quality, not castable)",
     "app.menu.mp4": "Flash (worse quality, castable)",
     "app.menu.source": "Video Source",
-    
+    "app.menu.m3u8_short": "HLS",
+    "app.menu.mp4_short": "mp4",
+
     "game-day-highlights.load_more": "Load more",
     "game-day-highlights.no_media": "No media available",
+    "game-day-highlights.playback_missing": "Playback missing for source",
     "game-day-highlights.videos": "videos"
 }

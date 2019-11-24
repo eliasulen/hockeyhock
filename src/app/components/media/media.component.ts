@@ -44,6 +44,32 @@ export class MediaComponent implements OnInit {
      }
    }
 
+   public selectedSource(media: Media)
+   {
+     if(this.showHls)
+     return Settings.source.m3u8;
+
+     if(this.showMp4)
+     return Settings.source.mp4
+
+   }
+
+   public hasSelectedSource(media: Media)
+   {
+
+     if(this.showHls)
+     {
+       return media.playbacks.filter(f => f.source == Settings.source.m3u8).length > 0
+     }
+
+     if(this.showMp4)
+     {
+       return media.playbacks.filter(f => f.source == Settings.source.mp4).length > 0
+     }
+
+     return false;
+   }
+
    public updateSources(value: string)
    {
     this.showHls = value == Settings.source.m3u8;

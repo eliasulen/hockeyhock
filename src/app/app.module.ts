@@ -10,6 +10,7 @@ import { PlayerHighlightsComponent } from './components/player-highlights/player
 import { GameDayHighlightsComponent } from './components/game-day-highlights/game-day-highlights.component';
 import { MediaComponent } from './components/media/media.component';
 import { MediaDialogComponent } from './dialogs/media-dialog/media-dialog.component';
+import { SettingComponent } from './components/setting/setting.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MediaDialogComponent } from './dialogs/media-dialog/media-dialog.compon
     PlayerHighlightsComponent,
     GameDayHighlightsComponent,
     MediaComponent,
-    MediaDialogComponent
+    MediaDialogComponent,
+    SettingComponent
     
   ],
   imports: [

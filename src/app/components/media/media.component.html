@@ -1,4 +1,9 @@
-<ng-container *ngIf="media">
+<ng-container *ngIf="media && media.playbacks">
+
+        <ng-container *ngIf="!hasSelectedSource(media)">
+                        <h1>{{ 'game-day-highlights.playback_missing' | translate }}: {{ 'app.menu.' + selectedSource(media) + '_short' | translate }}</h1>
+        </ng-container>
+        <ng-container *ngIf="hasSelectedSource(media)">
         <ng-container *ngFor="let playback of media.playbacks">
                 <vg-player *ngIf="showMp4 && playback.source == sourceMp4" (onPlayerReady)="onPlayerReady($event, dialog)">
                         <video [autoplay]="dialog" [poster]="media.posterUrl" [preload]="dialog ? 'auto' : 'none'" [vgMedia]="video" #video [id]="getVideoId(media)" controls>
@@ -20,5 +25,9 @@
                 </vg-player>
                 <!-- <track *ngIf="playerHighlight.media.captionsUrl" label="English" kind="subtitles" srclang="en" [src]="playerHighlight.media.captionsUrl"> -->
         </ng-container>
+</ng-container>
+</ng-container>
 
+<ng-container *ngIf="!media || !media.playbacks">
+        <h1>{{ 'game-day-highlights.no_media' | translate }}</h1>
 </ng-container>
