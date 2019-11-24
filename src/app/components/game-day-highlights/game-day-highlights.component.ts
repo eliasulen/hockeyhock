@@ -3,6 +3,8 @@ import { GameDayHighlightsFactoryService } from '../../factories/game-day-highli
 import { GameDayHighlight } from '../../data/internal/game-day-highlight'
 import { DatePipe } from '@angular/common'
 import { Playback, MediaPlayback, Media } from '../../data/internal/media'
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MediaDialogComponent } from '../../dialogs/media-dialog/media-dialog.component'
 
 @Component({
   selector: 'app-game-day-highlights',
@@ -16,10 +18,23 @@ public startDate : string;
 public allDates: string[] = []
 public lastDate: string;
 
-  constructor(private gameDayHighlightsFactoryService: GameDayHighlightsFactoryService, private datePipe: DatePipe) { }
+  constructor(private gameDayHighlightsFactoryService: GameDayHighlightsFactoryService, private datePipe: DatePipe, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.load();
+  }
+
+  openDialog(media: Media): void {
+
+    const dialogRef = this.dialog.open(MediaDialogComponent, {
+      data: {media: media },
+      backdropClass: "media-backdrop",
+      panelClass: "media-dialog"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+  
+    });
   }
 
   private load()
@@ -33,6 +48,11 @@ public lastDate: string;
         this.allDates.push(this.startDate)
         console.log(x)
       })
+  }
+
+  getLogoLink(id: string)
+  {
+    return `https://www-league.nhlstatic.com/images/logos/teams-current-circle/${id}.svg`
   }
 
   public loadMore()

@@ -6,6 +6,13 @@ export enum MediaPlayback
     embed = "Embed"
 }
 
+export enum MediaSource
+{
+    m3u8 = "m3u8",
+    mp4 = "mp4",
+    embed = "embed"
+}
+
 export enum MediaEpg
 {
     Extended_Highlights = "Extended Highlights"
@@ -26,5 +33,6 @@ export interface Media {
 export interface Playback
 {
     url: string
-    type: MediaPlayback
+    type: MediaPlayback,
+    source: MediaSource
 }

@@ -5,7 +5,7 @@ import { Observable, forkJoin, observable, of } from 'rxjs';
 import { ScheduleDataService } from '../../services/schedule/schedule-data.service';
 import { GameDayHighlight, Game, Venue, Team, GameStatus, GameType } from 'src/app/data/internal/game-day-highlight';
 import { ScheduleResponse } from '../../data/external/schedule-response';
-import { MediaEpg, Media, MediaPlayback, Playback } from '../../data/internal/media'
+import { MediaEpg, Media, MediaPlayback, Playback, MediaSource } from '../../data/internal/media'
 import { Epg } from '../../data/external/content-response'
 import { ContentPoster } from '../../data/external/content-response'
 
@@ -60,24 +60,26 @@ export class GameDayHighlightsFactoryService {
     extendedHighlight.items[0].playbacks.forEach(x => {
       let playback : Playback;
 
-      if(x.name == MediaPlayback.FLASH_1800K_896x504)
+      if(x.name == MediaPlayback.FLASH_1800K_896x504 || x.name == MediaPlayback.FLASH_1800K_960X540)
       {
         playback = {
           url: x.url,
-          type: MediaPlayback.FLASH_1800K_896x504
+          type: MediaPlayback.FLASH_1800K_896x504,
+          source: MediaSource.mp4
         }
       }
       else if(x.name == MediaPlayback.HTTP_CLOUD_WIRED_60)
       {
         playback = {
           url: x.url,
-          type: MediaPlayback.HTTP_CLOUD_WIRED_60
+          type: MediaPlayback.HTTP_CLOUD_WIRED_60,
+          source: MediaSource.m3u8
         }
       } else{
         //TODO embed
       }
 
-      if(playback)
+      if(playback && playbacks.filter(f => f.source == playback.source).length == 0)
         playbacks.push(playback)
     })
 

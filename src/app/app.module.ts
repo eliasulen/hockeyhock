@@ -9,6 +9,7 @@ import { SharedModule } from './modules/shared/shared.module';
 import { PlayerHighlightsComponent } from './components/player-highlights/player-highlights.component';
 import { GameDayHighlightsComponent } from './components/game-day-highlights/game-day-highlights.component';
 import { MediaComponent } from './components/media/media.component';
+import { MediaDialogComponent } from './dialogs/media-dialog/media-dialog.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MediaComponent } from './components/media/media.component';
     MenuComponent,
     PlayerHighlightsComponent,
     GameDayHighlightsComponent,
-    MediaComponent
+    MediaComponent,
+    MediaDialogComponent
     
   ],
   imports: [
@@ -24,6 +26,9 @@ import { MediaComponent } from './components/media/media.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule
+  ],
+  entryComponents: [
+    MediaDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

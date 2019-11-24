@@ -1,6 +1,8 @@
 
 <ng-container *ngIf="gameDayHighlights">
     <ng-container *ngFor="let gameDayHighlight of gameDayHighlights">
+      
+
             <mat-grid-list cols="1" rowHeight="100px">
                     <mat-grid-tile>        
                         <h1 class="highlight-title">{{ gameDayHighlight.dates.join(", ") }}</h1>
@@ -9,14 +11,32 @@
                             <p>{{ 'game-day-highlights.no_media' | translate }}</p>
                     </mat-grid-tile> -->
             </mat-grid-list>
-            <mat-grid-list  cols="2" rowHeight="2:1.25"> <!-- *ngIf="hasMedia(gameDayHighlight)" -->
-                            <ng-container *ngFor="let game of gameDayHighlight.games">
-                                <mat-grid-tile>    
-                                    <app-media [media]="game.media"></app-media>
-                                </mat-grid-tile>
-                            </ng-container>
+            <mat-grid-list cols="1" [rowHeight]="48 * gameDayHighlight.games.length + 'px'">
+                    <mat-grid-tile>
+                
+                                <!-- [color]="chip.color" -->
+                                        <mat-list>
+                                                        <mat-divider></mat-divider>
+                                                        <ng-container *ngFor="let game of gameDayHighlight.games"> 
+                                                        <mat-list-item class="pointer-cursor" (click)="openDialog(game.media)">
+                                                        <img class="team-logo" style="width:50px; height:50px" [src]="getLogoLink(game.homeTeam.id)"/>
+                                                                <span class="team-separator">vs</span>
+                                                        <img class="team-logo" [src]="getLogoLink(game.awayTeam.id)"/>
+                                                        </mat-list-item>
+                                                        <mat-divider></mat-divider>
+                                                </ng-container>
+                                                <mat-divider></mat-divider>
+                                        </mat-list>
+                    </mat-grid-tile>
             </mat-grid-list>
     </ng-container>
+        
+
+              
+                <!-- <ng-container *ngFor="let game of gameDayHighlight.games">
+                                        <button mat-raised-button (click)="openDialog(game.media)">Pick one</button>
+                            </ng-container> -->
+
 
     <mat-grid-list cols="1" rowHeight="100px">
             <mat-grid-tile>      

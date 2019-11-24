@@ -35,5 +35,18 @@ $background-color: #000000;
     display: none !important;
 }
 
+.media-dialog mat-dialog-container{
+    background-color: transparent;
+}
+
+.cdk-global-overlay-wrapper
+{
+    background-color: rgba(0, 0, 0, 0.6)
+}
+
+.pointer-cursor {
+    cursor: pointer;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: $background-color; color: white; }

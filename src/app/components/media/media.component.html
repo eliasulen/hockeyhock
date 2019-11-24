@@ -1,22 +1,21 @@
-
-
-
-<ng-container *ngIf="media && media.playbacks">
+<ng-container *ngIf="media">
         <ng-container *ngFor="let playback of media.playbacks">
-                <vg-player *ngIf="showMp4 && showPlayback(playback, playbacks) && canShowMp4()">
-                        <video [poster]="media.posterUrl" preload="none" [vgMedia]="video" #video [id]="getVideoId(media)" controls>
+                <vg-player *ngIf="showMp4 && playback.source == sourceMp4" (onPlayerReady)="onPlayerReady($event, dialog)">
+                        <video [autoplay]="dialog" [poster]="media.posterUrl" [preload]="dialog ? 'auto' : 'none'" [vgMedia]="video" #video [id]="getVideoId(media)" controls>
                             <source [src]="playback.url" type="video/mp4">
                         </video>
                 </vg-player>
-                <vg-player *ngIf="showHls && showPlayback(playback, playbacks) && canShowHls()">
+                <vg-player *ngIf="showHls && playback.source == sourceHls" (onPlayerReady)="onPlayerReady($event, dialog)">
                         <video
                         #video
                         [vgMedia]="video"
                         [vgHls]="playback.url"
-                        preload="none"
+                        [preload]="dialog ? 'auto' : 'none'"
                         [id]="getVideoId(media)"
                         [poster]="media.posterUrl"
-                        crossorigin controls>
+                        crossorigin controls
+                        [autoplay]="dialog">
+                        <track kind="subtitles" srclang="en" default>
                         </video>
                 </vg-player>
                 <!-- <track *ngIf="playerHighlight.media.captionsUrl" label="English" kind="subtitles" srclang="en" [src]="playerHighlight.media.captionsUrl"> -->

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MediaDataService } from '../../services/media/media-data.service'
 import { map } from 'rxjs/operators'
-import { Media, MediaPlayback, Playback, MediaKeywordsAll } from '../../data/internal/media'
+import { Media, MediaPlayback, Playback, MediaKeywordsAll, MediaSource } from '../../data/internal/media'
 import { MediaResponse } from '../../data/external/media-response'
 
 @Injectable({
@@ -34,7 +34,8 @@ export class MediaFactoryService {
       let playback : Playback =
       {
         type: MediaPlayback[x.name],
-        url: x.url
+        url: x.url,
+        source: x.name == MediaPlayback.HTTP_CLOUD_WIRED_60 ? MediaSource.m3u8 : MediaSource.mp4
       }
       return playback;
     });
@@ -43,7 +44,8 @@ export class MediaFactoryService {
     let playback : Playback =
     {
       type: MediaPlayback.embed,
-      url: `https://www.nhl.com${x.url.replace("/video/", "/video/embed/")}`
+      url: `https://www.nhl.com${x.url.replace("/video/", "/video/embed/")}`,
+      source: MediaSource.embed
     }
 
     playbacks.push(playback);

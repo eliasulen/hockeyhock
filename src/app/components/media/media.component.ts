@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Media, Playback } from '../../data/internal/media';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Media, Playback, MediaSource } from '../../data/internal/media';
 import { SettingService } from '../../services/setting/setting.service';
 import { SettingType, Settings } from '../../data/internal/setting'
 
@@ -10,45 +10,53 @@ import { SettingType, Settings } from '../../data/internal/setting'
 })
 export class MediaComponent implements OnInit {
 
-  public showHls : boolean = false;
-  public showMp4 : boolean = false;
-  public showEmbed : boolean = false;
+  showHls : boolean = false;
+  showMp4 : boolean = false;
+  showEmbed : boolean = false;
+  @Input() dialog : boolean = false;
 
-  @Input() media: Media;
+  public sourceHls = MediaSource.m3u8
+  public sourceMp4 = MediaSource.mp4
+  public sourceEmbed = "todo"
+
+  @Input() public media: Media;
 
   constructor(private settingService: SettingService) {
 
     this.updateSources(this.settingService.get(SettingType.source))
 
+    if(!this.dialog)
+    {
     this.settingService.settingChanged.subscribe(x => {
       if(x && x.key == SettingType.source)
       {
         this.updateSources(x.value)
       }
     })
+    }
    }
 
-   private updateSources(value: string)
+   onPlayerReady($event: any, dialog: boolean)
+   {
+     if(dialog)
+     {
+
+     }
+   }
+
+   public updateSources(value: string)
    {
     this.showHls = value == Settings.source.m3u8;
     this.showEmbed = false;
     this.showMp4 = value == Settings.source.mp4;
    }
 
-  showPlayback(playback: Playback, media: Media) : boolean
+
+  showMedia()
   {
-    return true;
+    return this.media;
   }
 
-  canShowHls()
-  {
-    return true;
-  }
-
-  canShowMp4()
-  {
-    return true;
-  }
 
   getVideoId(media: Media) : number
   {
