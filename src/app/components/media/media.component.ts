@@ -57,10 +57,26 @@ export class MediaComponent implements OnInit {
 
    public hasSelectedEpg(medias: Media[])
    {
+      if(!medias)
+      return false;
+
       if(medias.length == medias.filter(f => f.epg == MediaEpg.Default).length)
         return true;
 
       return medias.filter(f => f.epg == this.epg).length > 0
+   }
+
+   public validMedias(medias: Media[])
+   {
+    
+    let result = true;
+
+     medias.forEach(x => {
+       if(!x)
+       result = false;
+     })
+
+     return result;
    }
 
 

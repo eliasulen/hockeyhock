@@ -1,11 +1,11 @@
-<ng-container *ngIf="!medias">
+<ng-container *ngIf="!validMedias(medias)">
                 <h1>{{ 'game-day-highlights.no_media' | translate }}</h1>
 </ng-container>
-<ng-container *ngIf="medias">
+<ng-container *ngIf="validMedias(medias)">
 <ng-container *ngIf="hasSelectedEpg(medias)">
 <ng-container *ngFor="let media of medias">
-<ng-container *ngIf="media.epg == selectedEpg(medias)">
-<ng-container *ngIf="media && media.playbacks">
+<ng-container *ngIf="media && media.playbacks && media.epg == selectedEpg(medias)">
+<ng-container>
         <ng-container *ngIf="!hasSelectedSource(media)">
                         <h1>{{ 'game-day-highlights.playback_missing' | translate }}: {{ 'app.menu.' + selectedSource() + '_short' | translate }}</h1>
         </ng-container>
