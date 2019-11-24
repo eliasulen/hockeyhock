@@ -1,43 +1,30 @@
-<ng-container *ngIf="!validMedias(medias)">
-                <h1>{{ 'game-day-highlights.no_media' | translate }}</h1>
-</ng-container>
-<ng-container *ngIf="validMedias(medias)">
-<ng-container *ngIf="hasSelectedEpg(medias)">
-<ng-container *ngFor="let media of medias">
-<ng-container *ngIf="media && media.playbacks && media.epg == selectedEpg(medias)">
-<ng-container>
-        <ng-container *ngIf="!hasSelectedSource(media)">
-                        <h1>{{ 'game-day-highlights.playback_missing' | translate }}: {{ 'app.menu.' + selectedSource() + '_short' | translate }}</h1>
-        </ng-container>
-        <ng-container *ngIf="hasSelectedSource(media)">
-        <ng-container *ngFor="let playback of media.playbacks">
-                <vg-player *ngIf="showMp4 && playback.source == sourceMp4">
-                        <video [autoplay]="dialog" [poster]="media.posterUrl" [preload]="dialog ? 'auto' : 'none'" [vgMedia]="video" #video [id]="getVideoId(media)" controls>
-                            <source [src]="playback.url" type="video/mp4">
-                        </video>
-                </vg-player>
-                <vg-player *ngIf="showHls && playback.source == sourceHls">
-                        <video
-                        #video
-                        [vgMedia]="video"
-                        [vgHls]="playback.url"
-                        [preload]="dialog ? 'auto' : 'none'"
-                        [id]="getVideoId(media)"
-                        [poster]="media.posterUrl"
-                        crossorigin controls
-                        [autoplay]="dialog">
-                        <track kind="subtitles" srclang="en" default>
-                        </video>
-                </vg-player>
-                <!-- <track *ngIf="playerHighlight.media.captionsUrl" label="English" kind="subtitles" srclang="en" [src]="playerHighlight.media.captionsUrl"> -->
+<ng-container *ngIf="mediaAdministratorService.hasShowableMedia(medias)">
+        <ng-container *ngFor="let media of medias">
+                <ng-container *ngIf="epg == media.epg || media.epg == settings.epgs.default">
+                        <ng-container *ngFor="let playback of media.playbacks">
+                                        <vg-player *ngIf="source == settings.source.mp4 && playback.source == settings.source.mp4">
+                                                <video [autoplay]="dialog" [poster]="media.posterUrl" [preload]="dialog ? 'auto' : 'none'" [vgMedia]="video" #video 
+                                                [id]="mediaAdministratorService.getVideoId(media)" controls>
+                                                <source [src]="playback.url" type="video/mp4">
+                                                </video>
+                                        </vg-player>
+                                        <vg-player *ngIf="source == settings.source.m3u8 && playback.source == settings.source.m3u8">
+                                                <video
+                                                #video
+                                                [vgMedia]="video"
+                                                [vgHls]="playback.url"
+                                                [preload]="dialog ? 'auto' : 'none'"
+                                                [id]="mediaAdministratorService.getVideoId(media)"
+                                                [poster]="media.posterUrl"
+                                                crossorigin controls
+                                                [autoplay]="dialog">
+                                                </video>
+                                        </vg-player>        
+                        </ng-container>
+                </ng-container>
         </ng-container>
 </ng-container>
-</ng-container>
-</ng-container>
-
-<ng-container *ngIf="!media || !media.playbacks">
+<ng-container *ngIf="!mediaAdministratorService.hasShowableMedia(medias)">
         <h1>{{ 'game-day-highlights.no_media' | translate }}</h1>
 </ng-container>
-</ng-container>
-</ng-container>
-</ng-container>
+

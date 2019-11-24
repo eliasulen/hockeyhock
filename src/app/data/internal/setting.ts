@@ -22,7 +22,8 @@ export const Settings = {
     },
     epgs : {
         extended_highlights: MediaEpg.Extended_Highlights,
-        standard: MediaEpg.Recap
+        standard: MediaEpg.Recap,
+        default: MediaEpg.Default
     }
 }
 

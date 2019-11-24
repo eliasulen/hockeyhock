@@ -30,8 +30,8 @@ export class GameDayHighlightsFactoryService {
               x =>
               {
                 let medias = this.toMedia(x.media.epg, x.posters, [MediaEpg.Extended_Highlights, MediaEpg.Recap])
-                game.media = medias[0]
-                game.alternateMedia = medias[1];
+                game.media = medias[0] || null
+                game.alternateMedia = medias[1] || null;
               } 
             )
           })
@@ -109,8 +109,16 @@ export class GameDayHighlightsFactoryService {
     
     )
  
+    let m : Media[] = []
 
-    return medias;
+    medias.forEach(x => {
+      if(x)
+      {
+        m.push(x)
+      }
+    })
+
+    return m;
   }
 
   private toGameDayHighlight(x: ScheduleResponse) : GameDayHighlight

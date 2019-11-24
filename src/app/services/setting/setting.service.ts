@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 
 const defaults : [SettingType, string][] =
 [
-  [SettingType.source, Settings.source.mp4],
+  [SettingType.source, Settings.source.m3u8],
   [SettingType.epg, Settings.epgs.extended_highlights]
 ]
 

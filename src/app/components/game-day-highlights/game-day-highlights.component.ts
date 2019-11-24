@@ -26,11 +26,19 @@ public lastDate: string;
 
   openDialog(media: Media, alternateMedia: Media): void {
 
+    let medias : Media[] = []
+    
+    if(media)
+      medias.push(media)
+
+    if(alternateMedia)
+      medias.push(alternateMedia)
+
     const dialogRef = this.dialog.open(MediaDialogComponent, {
-      data: {medias: [media, alternateMedia] },
+      data: {medias: medias },
       backdropClass: "media-backdrop",
       panelClass: "media-dialog",
-      width: "1400px"
+      width: "2000px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
