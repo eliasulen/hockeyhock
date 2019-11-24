@@ -29,7 +29,8 @@ public lastDate: string;
     const dialogRef = this.dialog.open(MediaDialogComponent, {
       data: {media: media },
       backdropClass: "media-backdrop",
-      panelClass: "media-dialog"
+      panelClass: "media-dialog",
+      width: "1400px"
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -1,6 +1,23 @@
-<ng-container>
+<div class="dialog-buttons">
+    <span tabindex="1"></span>
+        <button mat-icon-button [matMenuTriggerFor]="settingsMenu">
+                <mat-icon>settings</mat-icon>
+              </button>
+              <mat-menu #settingsMenu="matMenu">
+                  <button [matMenuTriggerFor]="sourceMenu" mat-menu-item>
+                      <span>{{ 'app.menu.source' | translate }}</span>
+                    </button>
+              </mat-menu>
+              <mat-menu #sourceMenu="matMenu">
+                <ng-container *ngFor="let sourceSetting of sourceSettings">
+                    <button (click)="setSource(sourceSetting)" mat-menu-item>
+                        <span>{{ ('app.menu.' + sourceSetting) | translate }}</span>
+                        <mat-icon *ngIf="getSource() == sourceSetting" class="selected">check_circle</mat-icon>
+                    </button>
+                </ng-container>
+              </mat-menu>
     <button class="close-button" (click)="close()" mat-icon-button>
             <mat-icon>close</mat-icon>
     </button>
-</ng-container>
+</div>
 <app-media [media]="media" [dialog]="true"></app-media>

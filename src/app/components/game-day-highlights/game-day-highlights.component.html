@@ -7,14 +7,11 @@
                     <mat-grid-tile>        
                         <h1 class="highlight-title">{{ gameDayHighlight.dates.join(", ") }}</h1>
                     </mat-grid-tile>
-                    <!-- <mat-grid-tile *ngIf="!hasMedia(gameDayHighlight)">
-                            <p>{{ 'game-day-highlights.no_media' | translate }}</p>
-                    </mat-grid-tile> -->
+    
             </mat-grid-list>
-            <mat-grid-list cols="1" [rowHeight]="48 * gameDayHighlight.games.length + 'px'">
+            <mat-grid-list cols="1" [rowHeight]="48 * gameDayHighlight.games.length + 35 + 'px'">
                     <mat-grid-tile>
-                
-                                <!-- [color]="chip.color" -->
+   
                                         <mat-list>
                                                         <mat-divider></mat-divider>
                                                         <ng-container *ngFor="let game of gameDayHighlight.games"> 
@@ -31,11 +28,6 @@
             </mat-grid-list>
     </ng-container>
         
-
-              
-                <!-- <ng-container *ngFor="let game of gameDayHighlight.games">
-                                        <button mat-raised-button (click)="openDialog(game.media)">Pick one</button>
-                            </ng-container> -->
 
 
     <mat-grid-list cols="1" rowHeight="100px">

@@ -12,6 +12,8 @@ import { SettingType, Settings } from '../../data/internal/setting'
 })
 export class MediaDialogComponent implements OnInit {
 
+  sourceSettings: string[] = []
+
   public media: Media;
 
   public showHls : boolean;
@@ -26,11 +28,22 @@ export class MediaDialogComponent implements OnInit {
       this.updateSources(this.settingService.get(SettingType.source));
     }
 
+    getSource()
+    {
+      return this.settingService.get(SettingType.source);
+    }
+
+    setSource(value: any)
+    {
+      this.settingService.save(SettingType.source, value);
+    }
+
   close(): void {
     this.dialogRef.close();
   }
 
   ngOnInit() {
+    this.sourceSettings = Object.keys(Settings.source).map(x => Settings.source[x])
   }
 
   public updateSources(value: string)

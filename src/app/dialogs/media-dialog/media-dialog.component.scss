@@ -1,4 +1,20 @@
-.close-button{
+:host{
+
+.dialog-buttons
+{
     float:right;
     margin-bottom: 3px;
 }
+
+.close-button{
+
+    margin-right: -3px;
+}
+
+
+
+}
+
+mat-icon.selected{
+    margin-left: 1rem;
+  }
