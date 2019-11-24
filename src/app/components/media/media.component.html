@@ -1,10 +1,22 @@
 <ng-container *ngIf="media && media.playbacks">
         <ng-container *ngFor="let playback of media.playbacks">
-                <vg-player *ngIf="isMp4(playback)">
+                <vg-player *ngIf="showMp4 && showPlayback(playback, playbacks) && canShowMp4()">
                         <video [poster]="media.posterUrl" preload="none" [vgMedia]="video" #video [id]="getVideoId(media)" controls>
                             <source [src]="playback.url" type="video/mp4">
                         </video>
                 </vg-player>
+                <vg-player *ngIf="showHls && showPlayback(playback, playbacks) && canShowHls()">
+                        <video
+                        #video
+                        [vgMedia]="video"
+                        [vgHls]="playback.url"
+                        preload="none"
+                        [id]="getVideoId(media)"
+                        [poster]="media.posterUrl"
+                        crossorigin controls>
+                        </video>
+                </vg-player>
+                <!-- <track *ngIf="playerHighlight.media.captionsUrl" label="English" kind="subtitles" srclang="en" [src]="playerHighlight.media.captionsUrl"> -->
         </ng-container>
 </ng-container>
 

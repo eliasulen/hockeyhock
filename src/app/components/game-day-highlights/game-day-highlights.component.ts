@@ -13,17 +13,24 @@ export class GameDayHighlightsComponent implements OnInit {
 
 public gameDayHighlights : GameDayHighlight[] = []
 public startDate : string;
+public allDates: string[] = []
 public lastDate: string;
 
   constructor(private gameDayHighlightsFactoryService: GameDayHighlightsFactoryService, private datePipe: DatePipe) { }
 
   ngOnInit() {
+    this.load();
+  }
+
+  private load()
+  {
     this.gameDayHighlightsFactoryService.get()
     .subscribe(x => 
       {
         this.startDate = x.dates[0]
         this.lastDate = x.dates[0]
         this.gameDayHighlights.push(x);
+        this.allDates.push(this.startDate)
         console.log(x)
       })
   }
@@ -40,11 +47,29 @@ public lastDate: string;
         x => {
           this.lastDate = transform;
           this.gameDayHighlights.push(x);
+          this.allDates.push(transform)
           console.log(x)
         }
       )
     }
   }
+
+  // public reinitialize()
+  // {
+  //   this.lastDate = this.startDate;
+  //   this.gameDayHighlights = []
+  //   this.allDates = []
+
+  //   let allDates = this.allDates;
+  //   this.load();
+
+  //   allDates.forEach((x, index) => {
+  //     if(index > 0)
+  //     {
+  //       this.loadMore();
+  //     }
+  //   })
+  // }
 
   public mediaAmount(gameDayHighlight: GameDayHighlight)
   {
@@ -54,16 +79,6 @@ public lastDate: string;
   public hasMedia(gameDayHighlight: GameDayHighlight)
   {
     return gameDayHighlight.games.filter(f => f.media != null).length > 0
-  }
-
-  public isMp4(playback: Playback)
-  {
-    return playback.type == MediaPlayback.FLASH_1800K_896x504 || playback.type == MediaPlayback.FLASH_1800K_960X540;
-  }
-
-  getVideoId(media: Media)
-  {
-    return media.mediaPlaybackId
   }
 
 

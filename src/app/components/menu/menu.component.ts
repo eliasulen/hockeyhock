@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { SettingService } from '../../services/setting/setting.service';
-import { SettingType } from '../../data/internal/setting'
+import { SettingType, Settings } from '../../data/internal/setting'
 
 const defaultSource = "mp4"
 
@@ -11,16 +11,18 @@ const defaultSource = "mp4"
   styleUrls: ['./menu.component.scss']
 })
 
-
-
 export class MenuComponent implements OnInit {
 
-  menuRoutes: string[] = ["game-day-highlights", "player-highlights"]
-  sourceSettings: string[] = ["m3u8", "mp4"]
+  menuRoutes: string[] = []
+  sourceSettings: string[] = []
 
   constructor(private router: Router, private settingService: SettingService) { }
 
   ngOnInit() {
+
+    this.sourceSettings = Object.keys(Settings.source).map(x => Settings.source[x])
+    this.menuRoutes = Object.keys(Settings.routes).map(x => Settings.routes[x])
+
     if(!this.settingService.get(SettingType.source))
     {
       this.settingService.save(SettingType.source, defaultSource);
