@@ -20,7 +20,7 @@ export class MediaComponent implements OnInit {
   @Input() public medias: Media[];
   
 
-  constructor(private mediaAdministratorService: MediaAdministratorService) {
+  constructor(public mediaAdministratorService: MediaAdministratorService) {
 
     this.mediaAdministratorService.sourceChanged.subscribe(x => {
       if(x)
