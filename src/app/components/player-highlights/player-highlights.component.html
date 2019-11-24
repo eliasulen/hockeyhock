@@ -4,7 +4,7 @@
         <ng-container *ngIf="playerHighlights">
                 <!-- TODO fixa style -->
                     <ng-container *ngFor="let playerHighlight of playerHighlights">
-                        <mat-grid-tile *ngIf="playerHighlight.media && playerHighlight.media.playbacks">
+                        <mat-grid-tile>
                             <app-media [media]="playerHighlight.media"></app-media>
                         </mat-grid-tile>
                     </ng-container>

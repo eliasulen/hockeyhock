@@ -5,13 +5,13 @@
                     <mat-grid-tile>        
                         <h1 class="highlight-title">{{ gameDayHighlight.dates.join(", ") }}</h1>
                     </mat-grid-tile>
-                    <mat-grid-tile *ngIf="!hasMedia(gameDayHighlight)">
+                    <!-- <mat-grid-tile *ngIf="!hasMedia(gameDayHighlight)">
                             <p>{{ 'game-day-highlights.no_media' | translate }}</p>
-                    </mat-grid-tile>
+                    </mat-grid-tile> -->
             </mat-grid-list>
-            <mat-grid-list *ngIf="hasMedia(gameDayHighlight)" cols="2" rowHeight="2:1.25">
+            <mat-grid-list  cols="2" rowHeight="2:1.25"> <!-- *ngIf="hasMedia(gameDayHighlight)" -->
                             <ng-container *ngFor="let game of gameDayHighlight.games">
-                                <mat-grid-tile *ngIf="game.media && game.media.playbacks">    
+                                <mat-grid-tile>    
                                     <app-media [media]="game.media"></app-media>
                                 </mat-grid-tile>
                             </ng-container>
