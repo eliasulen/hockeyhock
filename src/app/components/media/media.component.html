@@ -8,7 +8,6 @@
                 <vg-player *ngIf="showHls && playback.source == sourceHls" (onPlayerReady)="onPlayerReady($event, dialog)">
                         <video
                         #video
-                        vgHlsHeaders="headers"
                         [vgMedia]="video"
                         [vgHls]="playback.url"
                         [preload]="dialog ? 'auto' : 'none'"
