@@ -12,13 +12,11 @@ import {  Settings } from '../../data/internal/setting'
 export class MenuComponent implements OnInit {
 
   menuRoutes: string[] = []
-  sourceSettings: string[] = []
 
   constructor(private router: Router) { }
 
   ngOnInit() {
 
-    this.sourceSettings = Object.keys(Settings.source).map(x => Settings.source[x])
     this.menuRoutes = Object.keys(Settings.routes).map(x => Settings.routes[x])
 
     //TODO fixa sen

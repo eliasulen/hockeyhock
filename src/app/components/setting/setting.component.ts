@@ -16,9 +16,8 @@ export class SettingComponent implements OnInit {
 
   ngOnInit() {
     this.sourceSettings = Object.keys(Settings.source).map(x => Settings.source[x])
-    this.epgSettings = Object.keys(Settings.epgs).map(x => Settings.epgs[x])
+    this.epgSettings = Object.keys(Settings.epgs).map(x => Settings.epgs[x]).filter(x => x != Settings.epgs.default)
   }
-
 
   setSource(value: any)
   {

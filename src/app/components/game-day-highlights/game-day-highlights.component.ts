@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { GameDayHighlightsFactoryService } from '../../factories/game-day-highlights/game-day-highlights-factory.service';
-import { GameDayHighlight } from '../../data/internal/game-day-highlight'
+import { GameDayHighlight, Game, GameStatus } from '../../data/internal/game-day-highlight'
 import { DatePipe } from '@angular/common'
 import { Playback, MediaPlayback, Media } from '../../data/internal/media'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MediaDialogComponent } from '../../dialogs/media-dialog/media-dialog.component'
+import { MediaAdministratorService } from '../../services/media/media-administrator.service';
 
 @Component({
   selector: 'app-game-day-highlights',
@@ -18,27 +19,37 @@ public startDate : string;
 public allDates: string[] = []
 public lastDate: string;
 
-  constructor(private gameDayHighlightsFactoryService: GameDayHighlightsFactoryService, private datePipe: DatePipe, public dialog: MatDialog) { }
+  constructor(private gameDayHighlightsFactoryService: GameDayHighlightsFactoryService, private datePipe: DatePipe, public dialog: MatDialog, private mediaAdministratorService: MediaAdministratorService) { }
 
   ngOnInit() {
     this.load();
   }
 
-  openDialog(media: Media, alternateMedia: Media): void {
+  public gameFinished(game: Game) : boolean
+  {
+      return game.gameStatus == GameStatus.Final;
+  }
+
+  openDialog(game: Game): void {
+
+    if(!this.gameFinished(game))
+    return;
 
     let medias : Media[] = []
-    
-    if(media)
-      medias.push(media)
 
-    if(alternateMedia)
-      medias.push(alternateMedia)
+    if(game.media)
+      medias.push(game.media)
+
+    if(game.alternateMedia)
+      medias.push(game.alternateMedia)
+
+    let size = this.mediaAdministratorService.hasShowableMedia(medias) ? "2000px" : "450px"
 
     const dialogRef = this.dialog.open(MediaDialogComponent, {
       data: {medias: medias },
       backdropClass: "media-backdrop",
       panelClass: "media-dialog",
-      width: "2000px"
+      width: size
     });
 
     dialogRef.afterClosed().subscribe(result => {

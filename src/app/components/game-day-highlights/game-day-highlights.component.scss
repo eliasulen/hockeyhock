@@ -6,3 +6,12 @@
 .team-separator{
     margin: 2rem;
 }
+
+.pointer-cursor.not-finished{
+    cursor: auto;
+}
+
+.not-finished{
+    filter: grayscale(100%)
+}
+
