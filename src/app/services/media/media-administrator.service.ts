@@ -42,29 +42,15 @@ constructor(private settingService: SettingService) {
 
 public hasShowableMedia(medias: Media[])
 {
-  let valid = this.validMedias(medias)
   let epg = this.hasSelectedEpg(medias)
   let source = this.hasSelectedSource(medias)
 
-  return valid && epg && source;
+  return epg && source;
 }
 
-public getVideoId(media: Media) : string
+public getVideoId(media: Media, playback: Playback) : string
 {
-  return media.mediaPlaybackId + '-' + media.epg; 
-}
-
-private validMedias(medias: Media[])
-{
- 
- let result = true;
-
-  medias.forEach(x => {
-    if(!x)
-    result = false;
-  })
-
-  return result;
+  return media.mediaPlaybackId + '-' + media.epg + '-' + playback.source; 
 }
 
 private hasSelectedEpg(medias: Media[])

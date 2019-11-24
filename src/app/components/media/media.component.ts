@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Media, Playback, MediaSource, MediaEpg } from '../../data/internal/media';
 import { MediaAdministratorService } from '../../services/media/media-administrator.service';
 import { Settings } from '../../data/internal/setting'
+import { VgAPI } from 'videogular2/compiled/core';
 
 @Component({
   selector: 'app-media',
@@ -10,8 +11,10 @@ import { Settings } from '../../data/internal/setting'
 })
 export class MediaComponent implements OnInit {
 
+
   public source: string;
   public epg: string;
+  private api: VgAPI;
 
   public settings : any = Settings
 
@@ -40,6 +43,22 @@ export class MediaComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  public onPlayerReady(api: VgAPI, videoId: string)
+  {
+    this.api = api;
+    
+    // this.api.getDefaultMedia().subscriptions.loadedData.subscribe(x => {
+
+    //   if(this.api.textTracks[0])
+    //   {
+    //     for(var i = 0; i < this.api.textTracks.length; i++)
+    //     {
+    //       this.api.textTracks[0].removeCue(this.api.textTracks[0].cues[i])
+    //     }
+    //   }
+    // })
   }
 
 }

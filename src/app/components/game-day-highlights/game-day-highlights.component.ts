@@ -43,7 +43,7 @@ public lastDate: string;
     if(game.alternateMedia)
       medias.push(game.alternateMedia)
 
-    let size = this.mediaAdministratorService.hasShowableMedia(medias) ? "2000px" : "450px"
+    let size = this.mediaAdministratorService.hasShowableMedia(medias) ? "1350px" : "450px"
 
     const dialogRef = this.dialog.open(MediaDialogComponent, {
       data: {medias: medias },

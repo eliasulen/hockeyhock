@@ -1,20 +1,20 @@
-<ng-container *ngIf="mediaAdministratorService.hasShowableMedia(medias)">
+<div #mediaContainer *ngIf="mediaAdministratorService.hasShowableMedia(medias)">
         <ng-container *ngFor="let media of medias">
                 <ng-container *ngIf="epg == media.epg || media.epg == settings.epgs.default">
                         <ng-container *ngFor="let playback of media.playbacks">
-                                        <vg-player *ngIf="source == settings.source.mp4 && playback.source == settings.source.mp4">
+                                        <vg-player (onPlayerReady)="onPlayerReady($event, mediaAdministratorService.getVideoId(media, playback))" *ngIf="source == settings.source.mp4 && playback.source == settings.source.mp4">
                                                 <video [autoplay]="dialog" [poster]="media.posterUrl" [preload]="dialog ? 'auto' : 'none'" [vgMedia]="video" #video 
-                                                [id]="mediaAdministratorService.getVideoId(media)" controls>
+                                                [id]="mediaAdministratorService.getVideoId(media, playback)" controls>
                                                 <source [src]="playback.url" type="video/mp4">
                                                 </video>
                                         </vg-player>
-                                        <vg-player *ngIf="source == settings.source.m3u8 && playback.source == settings.source.m3u8">
+                                        <vg-player (onPlayerReady)="onPlayerReady($event, mediaAdministratorService.getVideoId(media, playback))" *ngIf="source == settings.source.m3u8 && playback.source == settings.source.m3u8">
                                                 <video
                                                 #video
                                                 [vgMedia]="video"
                                                 [vgHls]="playback.url"
                                                 [preload]="dialog ? 'auto' : 'none'"
-                                                [id]="mediaAdministratorService.getVideoId(media)"
+                                                [id]="mediaAdministratorService.getVideoId(media, playback)"
                                                 [poster]="media.posterUrl"
                                                 crossorigin controls
                                                 [autoplay]="dialog">
@@ -23,7 +23,7 @@
                         </ng-container>
                 </ng-container>
         </ng-container>
-</ng-container>
+</div>
 <ng-container *ngIf="!mediaAdministratorService.hasShowableMedia(medias)">
         <h1>{{ 'game-day-highlights.no_media' | translate }}</h1>
 </ng-container>
