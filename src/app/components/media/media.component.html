@@ -1,16 +1,22 @@
+<ng-container *ngIf="!medias">
+                <h1>{{ 'game-day-highlights.no_media' | translate }}</h1>
+</ng-container>
+<ng-container *ngIf="medias">
+<ng-container *ngIf="hasSelectedEpg(medias)">
+<ng-container *ngFor="let media of medias">
+<ng-container *ngIf="media.epg == selectedEpg(medias)">
 <ng-container *ngIf="media && media.playbacks">
-
         <ng-container *ngIf="!hasSelectedSource(media)">
-                        <h1>{{ 'game-day-highlights.playback_missing' | translate }}: {{ 'app.menu.' + selectedSource(media) + '_short' | translate }}</h1>
+                        <h1>{{ 'game-day-highlights.playback_missing' | translate }}: {{ 'app.menu.' + selectedSource() + '_short' | translate }}</h1>
         </ng-container>
         <ng-container *ngIf="hasSelectedSource(media)">
         <ng-container *ngFor="let playback of media.playbacks">
-                <vg-player *ngIf="showMp4 && playback.source == sourceMp4" (onPlayerReady)="onPlayerReady($event, dialog)">
+                <vg-player *ngIf="showMp4 && playback.source == sourceMp4">
                         <video [autoplay]="dialog" [poster]="media.posterUrl" [preload]="dialog ? 'auto' : 'none'" [vgMedia]="video" #video [id]="getVideoId(media)" controls>
                             <source [src]="playback.url" type="video/mp4">
                         </video>
                 </vg-player>
-                <vg-player *ngIf="showHls && playback.source == sourceHls" (onPlayerReady)="onPlayerReady($event, dialog)">
+                <vg-player *ngIf="showHls && playback.source == sourceHls">
                         <video
                         #video
                         [vgMedia]="video"
@@ -27,7 +33,11 @@
         </ng-container>
 </ng-container>
 </ng-container>
+</ng-container>
 
 <ng-container *ngIf="!media || !media.playbacks">
         <h1>{{ 'game-day-highlights.no_media' | translate }}</h1>
+</ng-container>
+</ng-container>
+</ng-container>
 </ng-container>

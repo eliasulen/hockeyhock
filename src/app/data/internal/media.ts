@@ -15,7 +15,9 @@ export enum MediaSource
 
 export enum MediaEpg
 {
-    Extended_Highlights = "Extended Highlights"
+    Default = "Default",
+    Extended_Highlights = "Extended Highlights",
+    Recap = "Recap"
 }
 
 export enum MediaKeywordsAll
@@ -27,7 +29,8 @@ export interface Media {
     playbacks: Playback[]
     mediaPlaybackId: number,
     posterUrl: string,
-    captionsUrl: string
+    captionsUrl: string,
+    epg: MediaEpg
 }
 
 export interface Playback

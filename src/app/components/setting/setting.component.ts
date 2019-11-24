@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingService } from '../../services/setting/setting.service'
+import { Settings, SettingType } from '../../data/internal/setting'
 
 @Component({
   selector: 'app-setting',
@@ -7,9 +9,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingComponent implements OnInit {
 
-  constructor() { }
+  sourceSettings: string[] = []
+  epgSettings: string[] = []
+
+  constructor(private settingService: SettingService) { }
 
   ngOnInit() {
+    this.sourceSettings = Object.keys(Settings.source).map(x => Settings.source[x])
+    this.epgSettings = Object.keys(Settings.epgs).map(x => Settings.epgs[x])
   }
 
+
+  setSource(value: any)
+  {
+    this.settingService.save(SettingType.source, value);
+  }
+
+  getSource()
+  {
+    return this.settingService.get(SettingType.source);
+  }
+
+  setEpg(value: any)
+  {
+    this.settingService.save(SettingType.epg, value);
+  }
+
+  getEpg()
+  {
+    return this.settingService.get(SettingType.epg);
+  }
 }

@@ -23,7 +23,8 @@ export interface Game {
     awayTeam: Team,
     gameType: GameType,
     venue: Venue
-    media: Media
+    media: Media,
+    alternateMedia: Media
 }
 
 export interface Team {

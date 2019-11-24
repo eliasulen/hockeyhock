@@ -1,1 +1,30 @@
-<p>setting works!</p>
+<button mat-icon-button [matMenuTriggerFor]="settingsMenu">
+        <mat-icon>settings</mat-icon>
+      </button>
+
+      <mat-menu #settingsMenu="matMenu">
+          <button [matMenuTriggerFor]="sourceMenu" mat-menu-item>
+              <span>{{ 'app.menu.source' | translate }}</span>
+            </button>
+            <button [matMenuTriggerFor]="epgMenu" mat-menu-item>
+                <span>{{ 'app.menu.epg' | translate }}</span>
+            </button>
+      </mat-menu>
+            <!-- Source -->
+      <mat-menu #sourceMenu="matMenu">
+        <ng-container *ngFor="let sourceSetting of sourceSettings">
+            <button (click)="setSource(sourceSetting)" mat-menu-item>
+                <span>{{ ('app.menu.' + sourceSetting.replace(" ", "_").toLowerCase() ) | translate }}</span>
+                <mat-icon *ngIf="getSource() == sourceSetting" class="selected">check_circle</mat-icon>
+            </button>
+        </ng-container>
+      </mat-menu>
+      <!-- Epgs -->
+      <mat-menu #epgMenu="matMenu">
+        <ng-container *ngFor="let epgSetting of epgSettings">
+            <button (click)="setEpg(epgSetting)" mat-menu-item>
+                <span>{{ ('app.menu.' + epgSetting.replace(" ", "_").toLowerCase()) | translate }}</span>
+                <mat-icon *ngIf="getEpg() == epgSetting" class="selected">check_circle</mat-icon>
+            </button>
+        </ng-container>
+      </mat-menu>

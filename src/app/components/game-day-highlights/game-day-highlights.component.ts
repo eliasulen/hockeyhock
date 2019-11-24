@@ -24,10 +24,10 @@ public lastDate: string;
     this.load();
   }
 
-  openDialog(media: Media): void {
+  openDialog(media: Media, alternateMedia: Media): void {
 
     const dialogRef = this.dialog.open(MediaDialogComponent, {
-      data: {media: media },
+      data: {medias: [media, alternateMedia] },
       backdropClass: "media-backdrop",
       panelClass: "media-dialog",
       width: "1400px"

@@ -15,7 +15,7 @@
                                         <mat-list>
                                                         <mat-divider></mat-divider>
                                                         <ng-container *ngFor="let game of gameDayHighlight.games"> 
-                                                        <mat-list-item class="pointer-cursor" (click)="openDialog(game.media)">
+                                                        <mat-list-item class="pointer-cursor" (click)="openDialog(game.media, game.alternateMedia)">
                                                         <img class="team-logo" style="width:50px; height:50px" [src]="getLogoLink(game.homeTeam.id)"/>
                                                                 <span class="team-separator">vs</span>
                                                         <img class="team-logo" [src]="getLogoLink(game.awayTeam.id)"/>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Media, Playback, MediaSource } from '../../data/internal/media';
+import { Media, Playback, MediaSource, MediaEpg } from '../../data/internal/media';
 import { SettingService } from '../../services/setting/setting.service';
 import { SettingType, Settings } from '../../data/internal/setting'
 
@@ -13,38 +13,58 @@ export class MediaComponent implements OnInit {
   showHls : boolean = false;
   showMp4 : boolean = false;
   showEmbed : boolean = false;
+
+  epg: string;
+
   @Input() dialog : boolean = false;
 
   public sourceHls = MediaSource.m3u8
   public sourceMp4 = MediaSource.mp4
   public sourceEmbed = "todo"
 
-  @Input() public media: Media;
+  @Input() public medias: Media[];
+  
 
   constructor(private settingService: SettingService) {
 
     this.updateSources(this.settingService.get(SettingType.source))
+    this.epg = this.settingService.get(SettingType.epg)
 
-    if(!this.dialog)
-    {
+
     this.settingService.settingChanged.subscribe(x => {
-      if(x && x.key == SettingType.source)
+      if(x)
       {
-        this.updateSources(x.value)
+        if(x.key == SettingType.source)
+        {
+          this.updateSources(x.value)
+        }
+        if(x.key == SettingType.epg)
+        {
+          this.epg = x.value;
+        }
       }
     })
-    }
+    
    }
 
-   onPlayerReady($event: any, dialog: boolean)
+   public selectedEpg(medias: Media[])
    {
-     if(dialog)
-     {
+    if(medias.length == medias.filter(f => f.epg == MediaEpg.Default).length)
+    return MediaEpg.Default;
 
-     }
+      return this.epg;
    }
 
-   public selectedSource(media: Media)
+   public hasSelectedEpg(medias: Media[])
+   {
+      if(medias.length == medias.filter(f => f.epg == MediaEpg.Default).length)
+        return true;
+
+      return medias.filter(f => f.epg == this.epg).length > 0
+   }
+
+
+   public selectedSource()
    {
      if(this.showHls)
      return Settings.source.m3u8;
@@ -78,15 +98,9 @@ export class MediaComponent implements OnInit {
    }
 
 
-  showMedia()
+  getVideoId(media: Media) : string
   {
-    return this.media;
-  }
-
-
-  getVideoId(media: Media) : number
-  {
-    return media.mediaPlaybackId; 
+    return media.mediaPlaybackId + '-' + media.epg; 
   }
 
   ngOnInit() {

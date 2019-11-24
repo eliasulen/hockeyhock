@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MediaDataService } from '../../services/media/media-data.service'
 import { map } from 'rxjs/operators'
-import { Media, MediaPlayback, Playback, MediaKeywordsAll, MediaSource } from '../../data/internal/media'
+import { Media, MediaPlayback, Playback, MediaKeywordsAll, MediaSource, MediaEpg } from '../../data/internal/media'
 import { MediaResponse } from '../../data/external/media-response'
 
 @Injectable({
@@ -56,7 +56,8 @@ export class MediaFactoryService {
       posterUrl: x.posterUrl,
       playbacks: playbacks,
       mediaPlaybackId: mediaPlaybackId,
-      captionsUrl: x.keywordsAll.filter(f => f.type == MediaKeywordsAll.closed_captions_location_vtt).map(f => f.value)[0]
+      captionsUrl: x.keywordsAll.filter(f => f.type == MediaKeywordsAll.closed_captions_location_vtt).map(f => f.value)[0],
+      epg: MediaEpg.Default
     }
 
     return media;

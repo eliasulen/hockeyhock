@@ -1,4 +1,4 @@
-import { MediaSource } from '../internal/media'
+import { MediaSource, MediaEpg } from '../internal/media'
 
 export interface Setting {
     key: SettingType,
@@ -7,7 +7,8 @@ export interface Setting {
 
 
 export enum SettingType {
-    source = "source"
+    source = "source",
+    epg = "epg"
 }
 
 export const Settings = {
@@ -18,6 +19,10 @@ export const Settings = {
     routes: {
         gameDayHighlights: "game-day-highlights",
         playerHighlights: "player-highlights" 
+    },
+    epgs : {
+        extended_highlights: MediaEpg.Extended_Highlights,
+        standard: MediaEpg.Recap
     }
 }
 

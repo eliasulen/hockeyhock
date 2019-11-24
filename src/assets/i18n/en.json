@@ -7,6 +7,9 @@
     "app.menu.source": "Video Source",
     "app.menu.m3u8_short": "HLS",
     "app.menu.mp4_short": "mp4",
+    "app.menu.epg": "Highlight Type",
+    "app.menu.extended_highlights": "Extended Highlights",
+    "app.menu.recap": "Standard Highlights",
 
     "game-day-highlights.load_more": "Load more",
     "game-day-highlights.no_media": "No media available",

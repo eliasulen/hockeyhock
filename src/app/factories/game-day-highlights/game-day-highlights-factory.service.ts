@@ -29,7 +29,9 @@ export class GameDayHighlightsFactoryService {
             this.mediaDataService.getByGameId(game.gamePk).subscribe(
               x =>
               {
-                game.media = this.toMedia(x.media.epg, x.posters, MediaEpg.Extended_Highlights)
+                let medias = this.toMedia(x.media.epg, x.posters, [MediaEpg.Extended_Highlights, MediaEpg.Recap])
+                game.media = medias[0]
+                game.alternateMedia = medias[1];
               } 
             )
           })
@@ -39,58 +41,76 @@ export class GameDayHighlightsFactoryService {
       )
   }
 
-  private toMedia(epgs : Epg[], contentPosters: ContentPoster[], type: MediaEpg) : Media
+  private toMedia(epgs : Epg[], contentPosters: ContentPoster[], types: MediaEpg[]) : Media[]
   {
-    //TODo fixa ful lösning
-    let trim = type.toString().replace("_", " ");
 
-    let extendedHighlight = epgs.filter(x => x.title == trim)[0];
-    let poster = contentPosters.filter(x => x.type == trim)[0];
+    let actualEpgs : Epg[] = []
+
+    types.forEach(x => {
+      let trim = x.toString().replace("_", " ");
+
+      let e = epgs.filter(x => x.title == trim)[0]
+
+      if(!e ||
+        !e.items ||
+         e.items.length == 0 || 
+         !e.items[0] ||
+          !e.items[0].playbacks ||
+           e.items[0].playbacks.length == 0)
+           return null;
+
+           actualEpgs.push(e);
+    })
+
 
     let playbacks : Playback[] = [] 
 
-    if(!extendedHighlight ||
-       !extendedHighlight.items ||
-        extendedHighlight.items.length == 0 || 
-        !extendedHighlight.items[0] ||
-         !extendedHighlight.items[0].playbacks ||
-          extendedHighlight.items[0].playbacks.length == 0)
-          return null;
+    let medias : Media[] = []
 
-    extendedHighlight.items[0].playbacks.forEach(x => {
-      let playback : Playback;
-
-      if(x.name == MediaPlayback.FLASH_1800K_896x504 || x.name == MediaPlayback.FLASH_1800K_960X540)
-      {
-        playback = {
-          url: x.url,
-          type: MediaPlayback.FLASH_1800K_896x504,
-          source: MediaSource.mp4
+    actualEpgs.forEach(x => {
+      x.items[0].playbacks.forEach(x => {
+        let playback : Playback;
+  
+        if(x.name == MediaPlayback.FLASH_1800K_896x504 || x.name == MediaPlayback.FLASH_1800K_960X540)
+        {
+          playback = {
+            url: x.url,
+            type: MediaPlayback.FLASH_1800K_896x504,
+            source: MediaSource.mp4
+          }
         }
-      }
-      else if(x.name == MediaPlayback.HTTP_CLOUD_WIRED_60)
-      {
-        playback = {
-          url: x.url,
-          type: MediaPlayback.HTTP_CLOUD_WIRED_60,
-          source: MediaSource.m3u8
+        else if(x.name == MediaPlayback.HTTP_CLOUD_WIRED_60)
+        {
+          playback = {
+            url: x.url,
+            type: MediaPlayback.HTTP_CLOUD_WIRED_60,
+            source: MediaSource.m3u8
+          }
+        } else{
+          //TODO embed
         }
-      } else{
-        //TODO embed
-      }
+  
+        if(playback && playbacks.filter(f => f.source == playback.source).length == 0)
+          playbacks.push(playback)
+          
+      
+        })
+        let media : Media = {
+          posterUrl: contentPosters.filter(f => f.type == x.title)[0].posterUrl,
+          mediaPlaybackId: Number(x.items[0].mediaPlaybackId),
+          captionsUrl: null, //TODO,
+          playbacks: playbacks,
+          epg: MediaEpg[x.title.replace(" ", "_")]
+        };
 
-      if(playback && playbacks.filter(f => f.source == playback.source).length == 0)
-        playbacks.push(playback)
-    })
+        medias.push(media)
+        playbacks = []
+    }
+    
+    )
+ 
 
-    let media : Media = {
-      posterUrl: poster.posterUrl,
-      mediaPlaybackId: Number(extendedHighlight.items[0].mediaPlaybackId),
-      captionsUrl: null, //TODO,
-      playbacks: playbacks
-    };
-
-    return media;
+    return medias;
   }
 
   private toGameDayHighlight(x: ScheduleResponse) : GameDayHighlight
@@ -122,7 +142,8 @@ export class GameDayHighlightsFactoryService {
           awayTeam: awayTeam,
           gameStatus: GameStatus[x.status.abstractGameState],
           gameType: GameType[x.gameType],
-          media: null //Set later
+          media: null, //Set later,
+          alternateMedia: null //Set later
         }
         
         data.push(game);

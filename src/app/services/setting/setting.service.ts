@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { SettingType, Setting } from '../../data/internal/setting'
+import { SettingType, Setting, Settings } from '../../data/internal/setting'
 import { BehaviorSubject } from 'rxjs';
+
+const defaults : [SettingType, string][] =
+[
+  [SettingType.source, Settings.source.mp4],
+  [SettingType.epg, Settings.epgs.extended_highlights]
+]
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +34,14 @@ export class SettingService {
 
   public get(key: SettingType)
   {
-    return localStorage.getItem(key.toString());
+    let item = localStorage.getItem(key.toString());
+
+    if(!item)
+    {
+      item = defaults.filter(f => f[0] == key)[0][1];
+    }
+
+    return item;
   }
   
 }

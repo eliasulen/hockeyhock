@@ -12,30 +12,13 @@ import { SettingType, Settings } from '../../data/internal/setting'
 })
 export class MediaDialogComponent implements OnInit {
 
-  sourceSettings: string[] = []
-
-  public media: Media;
-
-  public showHls : boolean;
-  public showMp4 : boolean;
-  public showEmbed : false;
+  public medias: Media[];
 
   constructor(
     private settingService: SettingService,
     public dialogRef: MatDialogRef<MediaDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      this.media = data.media;
-      this.updateSources(this.settingService.get(SettingType.source));
-    }
-
-    getSource()
-    {
-      return this.settingService.get(SettingType.source);
-    }
-
-    setSource(value: any)
-    {
-      this.settingService.save(SettingType.source, value);
+      this.medias = data.medias;
     }
 
   close(): void {
@@ -43,14 +26,7 @@ export class MediaDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sourceSettings = Object.keys(Settings.source).map(x => Settings.source[x])
   }
 
-  public updateSources(value: string)
-  {
-   this.showHls = value == Settings.source.m3u8;
-   this.showEmbed = false;
-   this.showMp4 = value == Settings.source.mp4;
-  }
 
 }
