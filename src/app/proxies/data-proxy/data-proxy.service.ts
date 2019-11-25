@@ -15,7 +15,7 @@ export class DataProxyService {
   constructor(private http: HttpClient) {
    }
 
-   public get(url: string)
+   public get(url: string) : any
    {
       let trimmed = url.replace(new RegExp("/", 'g'), "%2F");
       return this.http.get(`${environment.apiUrl}${proxy}${encodeURIComponent(trimmed)}`);
@@ -25,4 +25,13 @@ export class DataProxyService {
    {
       return this.http.get(`${environment.apiUrl}${poke}`)
    }
+
+   // if(x !== undefined && x !== null && x.constructor == Object){
+   //    console.log('object!!!')
+   //  }
+
+   //  if(x !== undefined && x !== null && x.constructor == String){
+   //   console.log('string!!!')
+   // }
+
 }

@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { SearchHighlightResponse } from '../../data/external/search-highlights-response'
+import { DataProxyService } from '../../proxies/data-proxy/data-proxy.service';
 
 const base: string = "https://search-api.svc.nhl.com/svc/search/v2/nhl_nr_sitesearch_en/sitesearch?hl=true&facet=type&expand=partner.media.image&q=";
-///team/{teamId}/?hl=true&facet=type&expand=partner.media.image&q=
 
   interface PageData{
     pageSize: number,
@@ -22,16 +22,16 @@ const base: string = "https://search-api.svc.nhl.com/svc/search/v2/nhl_nr_sitese
 
 export class SearchHighlightsDataService {
 
+  constructor(private http: HttpClient, private dataProxyService: DataProxyService) { }
 
-  constructor(private http: HttpClient) { }
-
-  private getPages(playerId: number, take: number, skip: number)
+  private getPages(playerId: number, take: number, skip: number) : Observable<PageData>
   {
     let url = `${base}${playerId}&page=${1}&type=video`;
 
-    return this.http.get<SearchHighlightResponse>(url)
+    return this.dataProxyService.get(url)
     .pipe(
-      map(result => {
+      map(x => {
+        let result = <SearchHighlightResponse>x;
         let skipPages = Math.ceil(skip / result.meta.page_size)
         let maxPages = result.meta.hits / result.meta.page_size;
         
