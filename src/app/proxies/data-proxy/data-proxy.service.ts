@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-const base = "https://hockeyhock-proxy.herokuapp.com/api/"
+import { environment } from '../../../environments/environment'
 
 const poke = "poke/"
 const proxy = "proxy/"
@@ -17,11 +16,11 @@ export class DataProxyService {
 
    public get(url: string)
    {
-      return this.http.get(`${encodeURIComponent(base + proxy + url)}`);
+      return this.http.get(`${encodeURIComponent(environment.apiUrl + proxy + url)}`);
    }
 
    public poke()
    {
-      return this.http.get(`${base}${poke}`)
+      return this.http.get(`${environment.apiUrl}${poke}`)
    }
 }

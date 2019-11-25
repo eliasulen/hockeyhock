@@ -24,9 +24,6 @@ export class AppComponent {
      // the lang to use, if the lang isn't available, it will use the current loader to get them
     translateService.use('en');
 
-    console.log('env')
-    console.log(environment.apiUrl)
-
     dataProxyService.poke().subscribe(x => {
         console.log('poke completed')
         console.log(x)
