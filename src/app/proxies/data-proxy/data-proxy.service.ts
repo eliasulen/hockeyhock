@@ -10,13 +10,15 @@ const proxy = "proxy/"
 })
 export class DataProxyService {
 
+   private poked: boolean = false;
 
   constructor(private http: HttpClient) {
    }
 
    public get(url: string)
    {
-      return this.http.get(`${encodeURIComponent(environment.apiUrl + proxy + url)}`);
+      let trimmed = url.replace(new RegExp("/", 'g'), "%2F");
+      return this.http.get(`${environment.apiUrl}${proxy}${encodeURIComponent(trimmed)}`);
    }
 
    public poke()

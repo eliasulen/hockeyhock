@@ -26,7 +26,11 @@ export class AppComponent {
 
     dataProxyService.poke().subscribe(x => {
         console.log('poke completed')
-        console.log(x)
+    })
+
+    dataProxyService.get("https://search-api.svc.nhl.com/svc/search/v2/nhl_nr_sitesearch_sv/sitesearch?hl=true&facet=type&expand=partner.media.image&q=nikita+kucherov&page=1&type=video&take=3").subscribe(x => 
+    {
+      console.log(x)
     })
 }
 }
