@@ -68,7 +68,7 @@ export class SearchHighlightsDataService {
           if(that.page * pageData.pageSize < take + pageData.pageSize)
           {
             let url = `${base}${playerId}&page=${that.page}&type=video`;
-            data.push(this.http.get<SearchHighlightResponse>(url))
+            data.push(this.dataProxyService.get(url))
           }
         })
 
