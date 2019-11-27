@@ -5,7 +5,7 @@ export const FadeAnimation =
         trigger('fade', [ 
           transition('void => *', [
             style({ opacity: 0 }), 
-            animate(800, style({opacity: 1}))
+            animate(600, style({opacity: 1}))
           ]) 
         ])
       ]
