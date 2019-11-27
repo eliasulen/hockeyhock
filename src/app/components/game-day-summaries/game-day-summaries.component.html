@@ -1,0 +1,38 @@
+<mat-grid-list cols="1" rowHeight="1000px">
+    <mat-grid-tile>        
+        <button mat-raised-button>
+
+        </button>
+        <mat-vertical-stepper [linear]="'false'" #stepper>
+          <mat-step>
+            <form>
+              <ng-template matStepLabel>Fill out your name</ng-template>
+      
+              <div>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step>
+            <form>
+              <ng-template matStepLabel>Fill out your address</ng-template>
+      
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            You are now done.
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button>Reset</button>
+            </div>
+          </mat-step>
+        </mat-vertical-stepper>
+    </mat-grid-tile>
+
+</mat-grid-list>
+

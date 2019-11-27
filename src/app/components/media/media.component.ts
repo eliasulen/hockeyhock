@@ -3,11 +3,13 @@ import { Media, Playback, MediaSource, MediaEpg } from '../../data/internal/medi
 import { MediaAdministratorService } from '../../services/media/media-administrator.service';
 import { Settings } from '../../data/internal/setting'
 import { VgAPI } from 'videogular2/compiled/core';
+import { FadeAnimation } from '../../setup/animations'
 
 @Component({
   selector: 'app-media',
   templateUrl: './media.component.html',
-  styleUrls: ['./media.component.scss']
+  styleUrls: ['./media.component.scss'],
+  animations: FadeAnimation
 })
 export class MediaComponent implements OnInit {
 

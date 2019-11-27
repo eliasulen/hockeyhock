@@ -11,6 +11,7 @@ import { GameDayHighlightsComponent } from './components/game-day-highlights/gam
 import { MediaComponent } from './components/media/media.component';
 import { MediaDialogComponent } from './dialogs/media-dialog/media-dialog.component';
 import { SettingComponent } from './components/setting/setting.component';
+import { GameDaySummariesComponent } from './components/game-day-summaries/game-day-summaries.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SettingComponent } from './components/setting/setting.component';
     GameDayHighlightsComponent,
     MediaComponent,
     MediaDialogComponent,
-    SettingComponent
+    SettingComponent,
+    GameDaySummariesComponent
     
   ],
   imports: [

@@ -1,6 +1,6 @@
 
-<ng-container *ngIf="gameDayHighlights">
-    <ng-container *ngFor="let gameDayHighlight of gameDayHighlights">
+<div @fade *ngIf="gameDayHighlights">
+    <div @fade *ngFor="let gameDayHighlight of gameDayHighlights">
       
 
             <mat-grid-list cols="1" rowHeight="100px">
@@ -12,28 +12,28 @@
             <mat-grid-list cols="1" [rowHeight]="48 * gameDayHighlight.games.length + 35 + 'px'">
                     <mat-grid-tile>
    
-                                        <mat-list>
+                                        <mat-list @fade>
                                                         <mat-divider></mat-divider>
-                                                        <ng-container *ngFor="let game of gameDayHighlight.games"> 
-                                                        <mat-list-item [ngClass]="{ 'not-finished': !gameFinished(game) }" class="pointer-cursor" (click)="openDialog(game)">
-                                                        <img class="team-logo" [src]="getLogoLink(game.homeTeam.id)"/>
-                                                                <span class="team-separator">vs</span>
-                                                        <img class="team-logo" [src]="getLogoLink(game.awayTeam.id)"/>
-                                                        </mat-list-item>
-                                                        <mat-divider></mat-divider>
-                                                </ng-container>
+                                                        <div matRipple *ngFor="let game of gameDayHighlight.games"> 
+                                                                <mat-list-item [ngClass]="{ 'not-finished': !gameFinished(game) }" class="pointer-cursor" (click)="openDialog(game)">
+                                                                <img class="team-logo" [src]="getLogoLink(game.homeTeam.id)"/>
+                                                                        <span class="team-separator">vs</span>
+                                                                <img class="team-logo" [src]="getLogoLink(game.awayTeam.id)"/>
+                                                                </mat-list-item>
+                                                                 <mat-divider></mat-divider>
+                                                        </div>
                                                 <mat-divider></mat-divider>
                                         </mat-list>
                     </mat-grid-tile>
             </mat-grid-list>
-    </ng-container>
+        </div>
         
 
 
     <mat-grid-list cols="1" rowHeight="100px">
-            <mat-grid-tile>      
+            <mat-grid-tile *ngIf="gameDayHighlights && gameDayHighlights.length > 0">      
                     <button (click)="loadMore()" mat-raised-button color="primary">{{ 'game-day-highlights.load_more' | translate}}</button>
             </mat-grid-tile>
     </mat-grid-list>
-</ng-container>
+</div>
 

@@ -3,7 +3,7 @@ import { MediaSource, MediaEpg } from '../internal/media'
 export interface Setting {
     key: SettingType,
     value: any
-}
+} 
 
 
 export enum SettingType {
@@ -24,6 +24,7 @@ export const Settings = {
         extended_highlights: MediaEpg.Extended_Highlights,
         standard: MediaEpg.Recap,
         default: MediaEpg.Default
-    }
+    },
+
 }
 

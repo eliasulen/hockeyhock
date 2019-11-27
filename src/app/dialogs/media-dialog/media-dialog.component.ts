@@ -5,10 +5,11 @@ import { Inject } from '@angular/core';
 import { SettingService } from '../../services/setting/setting.service';
 import { SettingType, Settings } from '../../data/internal/setting'
 
+
 @Component({
   selector: 'app-media-dialog',
   templateUrl: './media-dialog.component.html',
-  styleUrls: ['./media-dialog.component.scss']
+  styleUrls: ['./media-dialog.component.scss'],
 })
 export class MediaDialogComponent implements OnInit {
 

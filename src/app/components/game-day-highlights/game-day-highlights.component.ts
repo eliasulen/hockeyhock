@@ -6,11 +6,13 @@ import { Playback, MediaPlayback, Media } from '../../data/internal/media'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MediaDialogComponent } from '../../dialogs/media-dialog/media-dialog.component'
 import { MediaAdministratorService } from '../../services/media/media-administrator.service';
+import { FadeAnimation } from '../../setup/animations'
 
 @Component({
   selector: 'app-game-day-highlights',
   templateUrl: './game-day-highlights.component.html',
-  styleUrls: ['./game-day-highlights.component.scss']
+  styleUrls: ['./game-day-highlights.component.scss'],
+  animations: FadeAnimation
 })
 export class GameDayHighlightsComponent implements OnInit {
 

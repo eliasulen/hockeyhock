@@ -1,14 +1,15 @@
+<div @fade>
 <div #mediaContainer *ngIf="mediaAdministratorService.hasShowableMedia(medias)">
         <ng-container *ngFor="let media of medias">
-                <ng-container *ngIf="epg == media.epg || media.epg == settings.epgs.default">
+                <div @fade *ngIf="epg == media.epg || media.epg == settings.epgs.default">
                         <ng-container *ngFor="let playback of media.playbacks">
-                                        <vg-player (onPlayerReady)="onPlayerReady($event, mediaAdministratorService.getVideoId(media, playback))" *ngIf="source == settings.source.mp4 && playback.source == settings.source.mp4">
+                                        <vg-player @fade (onPlayerReady)="onPlayerReady($event, mediaAdministratorService.getVideoId(media, playback))" *ngIf="source == settings.source.mp4 && playback.source == settings.source.mp4">
                                                 <video [autoplay]="dialog" [poster]="media.posterUrl" [preload]="dialog ? 'auto' : 'none'" [vgMedia]="video" #video 
                                                 [id]="mediaAdministratorService.getVideoId(media, playback)" controls>
                                                 <source [src]="playback.url" type="video/mp4">
                                                 </video>
                                         </vg-player>
-                                        <vg-player (onPlayerReady)="onPlayerReady($event, mediaAdministratorService.getVideoId(media, playback))" *ngIf="source == settings.source.m3u8 && playback.source == settings.source.m3u8">
+                                        <vg-player @fade (onPlayerReady)="onPlayerReady($event, mediaAdministratorService.getVideoId(media, playback))" *ngIf="source == settings.source.m3u8 && playback.source == settings.source.m3u8">
                                                 <video
                                                 #video
                                                 [vgMedia]="video"
@@ -21,10 +22,10 @@
                                                 </video>
                                         </vg-player>        
                         </ng-container>
-                </ng-container>
+                </div>
         </ng-container>
 </div>
 <ng-container *ngIf="!mediaAdministratorService.hasShowableMedia(medias)">
         <h1>{{ 'game-day-highlights.no_media' | translate }}</h1>
 </ng-container>
-
+</div>
