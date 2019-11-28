@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameDaySummariesComponent implements OnInit {
 
+
   constructor() { }
 
   ngOnInit() {
   }
+
 
 }

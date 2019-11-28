@@ -1,38 +1,60 @@
-<mat-grid-list cols="1" rowHeight="1000px">
+<!-- <mat-grid-list cols="1" rowHeight="100px">
     <mat-grid-tile>        
-        <button mat-raised-button>
-
-        </button>
-        <mat-vertical-stepper [linear]="'false'" #stepper>
-          <mat-step>
-            <form>
-              <ng-template matStepLabel>Fill out your name</ng-template>
-      
-              <div>
-                <button mat-button matStepperNext>Next</button>
-              </div>
-            </form>
-          </mat-step>
-          <mat-step>
-            <form>
-              <ng-template matStepLabel>Fill out your address</ng-template>
-      
-              <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-              </div>
-            </form>
-          </mat-step>
-          <mat-step>
-            <ng-template matStepLabel>Done</ng-template>
-            You are now done.
-            <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button>Reset</button>
-            </div>
-          </mat-step>
-        </mat-vertical-stepper>
+        <h2 class="page-header">Tampa Bay Lightning vs Columbus Blue Jackets</h2>
+        
     </mat-grid-tile>
+</mat-grid-list> -->
 
-</mat-grid-list>
-
+       
+                <mgl-timeline [mobileWidthThreshold]="1">
+                    <div class="period-header">Period 1</div>
+                        <mgl-timeline-entry>
+                            <mgl-timeline-entry-header>Header</mgl-timeline-entry-header>
+                            <mgl-timeline-entry-dot [size]="50"></mgl-timeline-entry-dot>
+                            <mgl-timeline-entry-content>Content</mgl-timeline-entry-content>
+                        </mgl-timeline-entry>
+                        <mgl-timeline-entry class="alternate">
+                                <mgl-timeline-entry-header>Header</mgl-timeline-entry-header>
+                                <mgl-timeline-entry-dot [size]=50><p>14:35</p></mgl-timeline-entry-dot>
+                            </mgl-timeline-entry>
+                            <mgl-timeline-entry>
+                                    <mgl-timeline-entry-header>Header</mgl-timeline-entry-header>
+                                    <mgl-timeline-entry-dot [size]="50"></mgl-timeline-entry-dot>
+                                    <mgl-timeline-entry-content>Content</mgl-timeline-entry-content>
+                                </mgl-timeline-entry>
+                                <mgl-timeline-entry class="alternate">
+                                        <mgl-timeline-entry-header>Header</mgl-timeline-entry-header>
+                                        <mgl-timeline-entry-dot [size]=50><p>14:35</p></mgl-timeline-entry-dot>
+                                    </mgl-timeline-entry>
+                                    <mgl-timeline-entry class="spacer">
+                                            <mgl-timeline-entry-header>Header</mgl-timeline-entry-header>
+                                            <mgl-timeline-entry-dot [size]=50><p>14:35</p></mgl-timeline-entry-dot>
+                                        </mgl-timeline-entry>
+                                        <div class="period-header">Period 2</div>
+                                        <mgl-timeline-entry class="alternate">
+                                                <mgl-timeline-entry-header>Header</mgl-timeline-entry-header>
+                                                <mgl-timeline-entry-dot [size]=50><p>14:35</p></mgl-timeline-entry-dot>
+                                            </mgl-timeline-entry>
+                                            <mgl-timeline-entry class="alternate">
+                                                    <mgl-timeline-entry-header>Header</mgl-timeline-entry-header>
+                                                    <mgl-timeline-entry-dot [size]=50><p>14:35</p></mgl-timeline-entry-dot>
+                                                </mgl-timeline-entry>
+                                                <mgl-timeline-entry class="alternate">
+                                                        <mgl-timeline-entry-header>Header</mgl-timeline-entry-header>
+                                                        <mgl-timeline-entry-dot [size]=50><p>14:35</p></mgl-timeline-entry-dot>
+                                                    </mgl-timeline-entry>
+                                                    <mgl-timeline-entry class="alternate">
+                                                            <mgl-timeline-entry-header>Header</mgl-timeline-entry-header>
+                                                            <mgl-timeline-entry-dot [size]=50><p>14:35</p></mgl-timeline-entry-dot>
+                                                        </mgl-timeline-entry>
+                                                        <mgl-timeline-entry class="spacer">
+                                                                <mgl-timeline-entry-header>Header</mgl-timeline-entry-header>
+                                                                <mgl-timeline-entry-dot [size]=50><p>14:35</p></mgl-timeline-entry-dot>
+                                                            </mgl-timeline-entry>
+                                                            <div class="period-header">Period 3</div>
+                                                            <mgl-timeline-entry>
+                                                                    <mgl-timeline-entry-header>Header</mgl-timeline-entry-header>
+                                                                    <mgl-timeline-entry-dot [size]=50><p>14:35</p></mgl-timeline-entry-dot>
+                                                                </mgl-timeline-entry>
+                    </mgl-timeline>             
+                    

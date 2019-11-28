@@ -17,6 +17,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRippleModule } from '@angular/material/core';
+import { MatTableModule } from '@angular/material/table';
+import { MglTimelineModule } from 'angular-mgl-timeline';
 
 @NgModule({
   declarations: [],
@@ -38,7 +40,9 @@ import { MatRippleModule } from '@angular/material/core';
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
-    MatRippleModule
+    MatRippleModule,
+    MatTableModule,
+    MglTimelineModule
   ],
   exports: [
     CommonModule,
@@ -58,7 +62,9 @@ import { MatRippleModule } from '@angular/material/core';
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
-    MatRippleModule
+    MatRippleModule,
+    MatTableModule,
+    MglTimelineModule
   ]
 })
 export class UiModule { }
