@@ -14,5 +14,9 @@
     "game-day-highlights.load_more": "Load more",
     "game-day-highlights.no_media": "No media available",
     "game-day-highlights.playback_missing": "Playback missing for source",
-    "game-day-highlights.videos": "videos"
+    "game-day-highlights.videos": "videos",
+    "game-day-highlights.no_data": "No recent games. Please enter a date (UTC)",
+    "game-day-highlights.choose_date": "Choose date",
+    "game-day-highlights.no_games_found": "No games found for",
+    "game-day-highlights.reset": "Reset"
 }

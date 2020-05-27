@@ -7,6 +7,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MediaDialogComponent } from '../../dialogs/media-dialog/media-dialog.component'
 import { MediaAdministratorService } from '../../services/media/media-administrator.service';
 import { FadeAnimation } from '../../setup/animations'
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-game-day-highlights',
@@ -20,11 +21,65 @@ public gameDayHighlights : GameDayHighlight[] = []
 public startDate : string;
 public allDates: string[] = []
 public lastDate: string;
+public selectedDate: string;
+public manualDate: boolean;
 
   constructor(private gameDayHighlightsFactoryService: GameDayHighlightsFactoryService, private datePipe: DatePipe, public dialog: MatDialog, private mediaAdministratorService: MediaAdministratorService) { }
 
   ngOnInit() {
     this.load();
+  }
+
+
+  public reset()
+  {
+  this.allDates = []
+  this.gameDayHighlights = []
+
+    this.gameDayHighlightsFactoryService.get()
+    .subscribe(x => 
+      {
+        this.startDate = x.dates[0]
+        this.lastDate = x.dates[0]
+        this.gameDayHighlights.push(x);
+        this.allDates.push(this.startDate)
+        this.manualDate = false;
+        this.selectedDate = null;
+      })
+  }
+
+  dateSelection(event: MatDatepickerInputEvent<Date>) {
+    if(!event || !event.value)
+    return;
+
+    this.allDates = []
+    this.gameDayHighlights = []
+
+   let dateString = event.value.toString();
+
+   let date = new Date(dateString)
+
+   if(!date)
+   {
+     this.selectedDate = null;
+     return;
+   }
+
+   let format =  this.datePipe.transform(date, 'yyyy-MM-dd')
+
+   this.gameDayHighlightsFactoryService.get(format, format)
+   .subscribe(x => 
+     {
+       if(x.dates.length > 0)
+       {
+        this.startDate = x.dates[0]
+        this.lastDate = x.dates[0]
+        this.allDates.push(this.startDate)
+        this.gameDayHighlights.push(x);
+       }
+
+       this.selectedDate = format;
+     })
   }
 
   public gameFinished(game: Game) : boolean
@@ -59,9 +114,14 @@ public lastDate: string;
     });
   }
 
-  private load()
+  public hasData()
   {
-    this.gameDayHighlightsFactoryService.get()
+    return this.gameDayHighlights && this.gameDayHighlights.length > 0 && this.gameDayHighlights[0].dates.length > 0
+  }
+
+  private load(startDate?: string, endDate?: string)
+  {
+    this.gameDayHighlightsFactoryService.get(startDate, endDate)
     .subscribe(x => 
       {
         this.startDate = x.dates[0]
@@ -75,6 +135,13 @@ public lastDate: string;
   getLogoLink(id: string)
   {
     return `https://www-league.nhlstatic.com/images/logos/teams-current-circle/${id}.svg`
+  }
+
+  public setManualDate()
+  {
+    this.selectedDate = null;
+    this.gameDayHighlights = []
+    this.manualDate = true;
   }
 
   public loadMore()
@@ -95,23 +162,6 @@ public lastDate: string;
       )
     }
   }
-
-  // public reinitialize()
-  // {
-  //   this.lastDate = this.startDate;
-  //   this.gameDayHighlights = []
-  //   this.allDates = []
-
-  //   let allDates = this.allDates;
-  //   this.load();
-
-  //   allDates.forEach((x, index) => {
-  //     if(index > 0)
-  //     {
-  //       this.loadMore();
-  //     }
-  //   })
-  // }
 
   public mediaAmount(gameDayHighlight: GameDayHighlight)
   {

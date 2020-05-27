@@ -12,6 +12,7 @@ import { MediaComponent } from './components/media/media.component';
 import { MediaDialogComponent } from './dialogs/media-dialog/media-dialog.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { GameDaySummariesComponent } from './components/game-day-summaries/game-day-summaries.component';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -23,13 +24,13 @@ import { GameDaySummariesComponent } from './components/game-day-summaries/game-
     MediaDialogComponent,
     SettingComponent,
     GameDaySummariesComponent
-    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    MatMomentDateModule
   ],
   entryComponents: [
     MediaDialogComponent

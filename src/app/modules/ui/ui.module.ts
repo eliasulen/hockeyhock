@@ -18,7 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRippleModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
-import { MglTimelineModule } from 'angular-mgl-timeline';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [],
@@ -42,7 +42,7 @@ import { MglTimelineModule } from 'angular-mgl-timeline';
     MatInputModule,
     MatRippleModule,
     MatTableModule,
-    MglTimelineModule
+    MatDatepickerModule
   ],
   exports: [
     CommonModule,
@@ -64,7 +64,7 @@ import { MglTimelineModule } from 'angular-mgl-timeline';
     MatInputModule,
     MatRippleModule,
     MatTableModule,
-    MglTimelineModule
+    MatDatepickerModule
   ]
 })
 export class UiModule { }

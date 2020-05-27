@@ -26,12 +26,4 @@ export class DataProxyService {
       return this.http.get(`${environment.apiUrl}${poke}`)
    }
 
-   // if(x !== undefined && x !== null && x.constructor == Object){
-   //    console.log('object!!!')
-   //  }
-
-   //  if(x !== undefined && x !== null && x.constructor == String){
-   //   console.log('string!!!')
-   // }
-
 }

@@ -2,7 +2,6 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
-@import '~angular-mgl-timeline/theme';
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -26,7 +25,6 @@ $hockeyhock-theme: mat-dark-theme($hockeyhock-primary, $hockeyhock-accent, $hock
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($hockeyhock-theme);
-@include mgl-timeline-theme($hockeyhock-theme);
 
 /* You can add global styles to this file, and also import other style files */
 
