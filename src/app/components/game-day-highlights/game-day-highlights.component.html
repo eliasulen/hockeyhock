@@ -35,7 +35,7 @@
                 </mat-grid-tile>
         </mat-grid-list>
 </div>
-<div @fade *ngIf="!hasData()">
+<div @fade *ngIf="!hasData() && initialLoad">
         <mat-grid-list cols="1" rowHeight="100px">
                 <mat-grid-tile *ngIf="!manualDate">
                         <h1 class="page-header">{{ 'game-day-highlights.no_data' |  translate }}</h1>

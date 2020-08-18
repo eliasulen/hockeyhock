@@ -23,6 +23,7 @@ public allDates: string[] = []
 public lastDate: string;
 public selectedDate: string;
 public manualDate: boolean;
+public initialLoad: boolean;
 
   constructor(private gameDayHighlightsFactoryService: GameDayHighlightsFactoryService, private datePipe: DatePipe, public dialog: MatDialog, private mediaAdministratorService: MediaAdministratorService) { }
 
@@ -129,6 +130,11 @@ public manualDate: boolean;
         this.gameDayHighlights.push(x);
         this.allDates.push(this.startDate)
         console.log(x)
+      },
+      () => {},
+      () => {
+        if(!this.initialLoad)
+          this.initialLoad = true;
       })
   }
 
