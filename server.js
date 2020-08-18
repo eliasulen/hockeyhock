@@ -3,17 +3,16 @@ const path = require('path');
 const app = express();
 
 var appName = 'hockeyhock'
-var customHost = 'https://hh.eliasulen.se' //Empty if none
-var customHostProtocol = 'https://'
-var standard = 'herokuapp'
+var customHost = 'hh.eliasulen.se' //Empty if none
+var standardHost = 'herokuapp'
 
 // Http -> Https redirect and custom domain redirect
 app.use((req, res, next) => {
   var host = customHost ? customHost : req.header('host')
 
-  if(customHost && req.header('host').includes(standard))
+  if(customHost && req.header('host').includes(standardHost))
   {
-    res.redirect(`${customHostProtocol}${host}${req.url}`) //Standard -> 
+    res.redirect(`https://${host}${req.url}`) //Standard -> CustomHost
   }
   else if (req.header('x-forwarded-proto') !== 'https') {
     res.redirect(`https://${host}${req.url}`) //Http -> Https
