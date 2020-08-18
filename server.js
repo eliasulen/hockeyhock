@@ -2,6 +2,15 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
+// Http -> Https redirect
+app.use((req, res, next) => {
+  if (req.header('x-forwarded-proto') !== 'https') {
+    res.redirect(`https://${req.header('host')}${req.url}`)
+  } else {
+    next();
+  }
+});
+
 // Serve static files....
 app.use(express.static(__dirname + '/dist/hockeyhock'));
 
